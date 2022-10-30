@@ -8,3 +8,6 @@ export const menuItems: menuItemsType = {
 export const footerItems: menuItemsType = {
     text: "Copyright ©; fmide.com"
 }
+export const footerCSS = {
+    backgroundColor: 'lightblue',
+}

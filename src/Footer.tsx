@@ -1,8 +1,8 @@
 import React from "react";
-import {footerItems} from "./setting";
+import {footerCSS, footerItems} from "./setting";
 
 export function Footer() {
-    return (<footer>
+    return (<footer style={footerCSS}>
         <p>{footerItems.text}</p>
     </footer>);
 }
