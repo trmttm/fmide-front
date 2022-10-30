@@ -4,3 +4,7 @@ export const menuItems: menuItemsType = {
     'Blogs': "/blogs",
     'IDE': "/ide",
 }
+
+export const footerItems: menuItemsType = {
+    text: "Copyright ©; fmide.com"
+}

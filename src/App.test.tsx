@@ -2,10 +2,18 @@ import React from "react";
 import {render, screen} from "@testing-library/react";
 import App from "./App";
 
-test("Menu items should be shown", () => {
-    render(<App/>);
-    const headerElement = screen.getByRole("Header");
-    expect(headerElement).toBeInTheDocument();
-    expect(headerElement).toBeVisible();
+function detectElement(roleName: string) {
+    const element = screen.getByRole(roleName);
+    expect(element).toBeInTheDocument();
+    expect(element).toBeVisible();
+}
 
+test("Menu is shown", () => {
+    render(<App/>);
+    detectElement("Header");
+});
+
+test("Footer is shown", () => {
+    render(<App/>);
+    detectElement("contentinfo");
 });
