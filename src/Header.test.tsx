@@ -1,10 +1,10 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import App from "./App";
 import {menuItems} from "./setting";
+import {Header} from "./Header";
 
 test("Menu items should be shown", () => {
-    render(<App/>);
+    render(<Header/>);
 
 
     Object.keys(menuItems).forEach(menuText => {
