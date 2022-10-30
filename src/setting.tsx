@@ -1,28 +1,16 @@
-type keyStrValStr = { [key: string]: string }
+type keyStrValStr = { [key: string]: string };
 export const menuItems: keyStrValStr = {
-    'Home': "/home",
-    'Blogs': "/blogs",
-    'IDE': "/ide",
-}
+  Home: "/home",
+  Blogs: "/blogs",
+  IDE: "/ide",
+};
 
-export const footerItems: keyStrValStr = {
-    text: "Copyright ©; fmide.com"
-}
 export const footerCSS = {
-    backgroundColor: 'lightblue',
-}
-
-export const buttonNames: keyStrValStr = {
-    addNewAccount: 'New Account',
-}
-
-export const formEditAccount: keyStrValStr = {
-    titleAddNewAccount: 'Account Name',
-    ok: 'Add New Account',
-    cancel: 'Cancel',
-    labelAccountName: "Name",
-    labelAccountDescription: "Description",
-    labelIsVerticalAccount: "Vertical Account",
-    defaultAccountName: "Account Name",
-    description: "This account is IS account."
-}
+  backgroundColor: "lightblue",
+};
+export const textFooter: string = "Copyright ©; fmide.com";
+export const btnTextAddNewAccount: string = "New Account";
+export const btnTextOk: string = "Ok";
+export const btnTextCancel: string = "Cancel";
+export const titleAddNewAccount: string = "Account Name";
+export const defaultAccountName: string = "Account Name";

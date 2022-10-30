@@ -1,8 +1,11 @@
 import React from "react";
-import {footerCSS, footerItems} from "./setting";
+import * as setting from "./setting";
+import { footerCSS } from "./setting";
 
 export function Footer() {
-    return (<footer style={footerCSS}>
-        <p>{footerItems.text}</p>
-    </footer>);
+  return (
+    <footer style={footerCSS}>
+      <p>{setting.textFooter}</p>
+    </footer>
+  );
 }
