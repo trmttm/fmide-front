@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "react-bootstrap": "^2.5.0"
   }
 }
