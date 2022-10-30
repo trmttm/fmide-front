@@ -8,9 +8,9 @@ export const menuItems: keyStrValStr = {
 export const footerCSS = {
   backgroundColor: "lightblue",
 };
-export const textFooter: string = "Copyright ©; fmide.com";
-export const btnTextAddNewAccount: string = "New Account";
-export const btnTextOk: string = "Ok";
-export const btnTextCancel: string = "Cancel";
-export const titleAddNewAccount: string = "Account Name";
-export const defaultAccountName: string = "Account Name";
+export let textFooter: string = "Copyright ©; fmide.com";
+export let btnTextAddNewAccount: string = "New Account";
+export let btnTextOk: string = "Ok";
+export let btnTextCancel: string = "Cancel";
+export let titleAddNewAccount: string = "Account Name";
+export let defaultAccountName: string = "Account Name";
