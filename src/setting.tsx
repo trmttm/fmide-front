@@ -15,3 +15,9 @@ export const footerCSS = {
 export const buttonNames: keyStrValStr = {
     addNewAccount: 'New Account',
 }
+
+export const formAddNewAccount: keyStrValStr = {
+    title: 'Define Account',
+    ok: 'Add New Account',
+    cancel: 'Cancel'
+}
