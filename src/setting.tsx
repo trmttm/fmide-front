@@ -16,8 +16,13 @@ export const buttonNames: keyStrValStr = {
     addNewAccount: 'New Account',
 }
 
-export const formAddNewAccount: keyStrValStr = {
-    title: 'Define Account',
+export const formEditAccount: keyStrValStr = {
+    titleAddNewAccount: 'Account Name',
     ok: 'Add New Account',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    labelAccountName: "Name",
+    labelAccountDescription: "Description",
+    labelIsVerticalAccount: "Vertical Account",
+    defaultAccountName: "Account Name",
+    description: "This account is IS account."
 }

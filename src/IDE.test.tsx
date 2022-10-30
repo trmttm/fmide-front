@@ -1,7 +1,7 @@
 import React from "react";
 import {fireEvent, render, screen} from "@testing-library/react";
 import {IDE} from "./IDE";
-import {buttonNames, formAddNewAccount} from "./setting";
+import {buttonNames, formEditAccount} from "./setting";
 
 
 function getAddNewButton() {
@@ -19,7 +19,7 @@ test("Button addNewAccount ask user for account name", () => {
     render(<IDE/>);
     const button = getAddNewButton();
     fireEvent.click(button);
-    const inputElement = screen.getByText(formAddNewAccount.title);
+    const inputElement = screen.getByText(formEditAccount.titleAddNewAccount);
     expect(inputElement).toBeInTheDocument();
 });
 
