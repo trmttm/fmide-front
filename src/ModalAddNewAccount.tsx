@@ -2,13 +2,27 @@ import * as setting from "./setting";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import React from "react";
+import React, { useState } from "react";
+import { accounts } from "./states";
 
-type propsModalAddNewAccount = { show: boolean; handleClose: () => void };
+type propsModalAddNewAccount = { show?: boolean; handleClose?: () => void };
 
 export function ModalAddNewAccount(props: propsModalAddNewAccount) {
-  let show = props.show;
-  let handleClose = props.handleClose;
+  const [lShow, setLShow] = useState(true);
+
+  const show = props.show ? props.show : lShow;
+  const handleClose = props.handleClose ? props.handleClose : () => setLShow;
+  const [userInput, setUserInput] = useState("");
+
+  function updateUserInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInput(event.target.value);
+  }
+
+  function addNewAccountAndClose() {
+    accounts.push(userInput);
+    setUserInput("");
+    handleClose();
+  }
 
   return (
     <div>
@@ -20,6 +34,9 @@ export function ModalAddNewAccount(props: propsModalAddNewAccount) {
           <Form.Control
             type="text"
             placeholder={setting.defaultAccountName}
+            onChange={updateUserInput}
+            value={userInput}
+            data-testid={setting.testIdInputAddNewAccount}
             autoFocus
           />
         </Modal.Body>
@@ -27,7 +44,7 @@ export function ModalAddNewAccount(props: propsModalAddNewAccount) {
           <Button variant="secondary" onClick={handleClose}>
             {setting.btnTextCancel}
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={addNewAccountAndClose}>
             {setting.btnTextOk}
           </Button>
         </Modal.Footer>
