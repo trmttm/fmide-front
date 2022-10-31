@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
-import * as setting from "./setting";
+import * as setting from "../setting";
 
 function getAddNewButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });

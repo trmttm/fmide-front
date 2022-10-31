@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as setting from "./setting";
+import * as setting from "../setting";
 import Button from "react-bootstrap/Button";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 

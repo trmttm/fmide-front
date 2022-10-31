@@ -1,9 +1,9 @@
-import * as setting from "./setting";
+import * as setting from "../setting";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
-import { accounts } from "./states";
+import { accounts } from "../states";
 
 type propsModalAddNewAccount = { show?: boolean; handleClose?: () => void };
 

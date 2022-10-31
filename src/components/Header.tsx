@@ -1,4 +1,4 @@
-import { menuItems } from "./setting";
+import { menuItems } from "../setting";
 import Nav from "react-bootstrap/Nav";
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";

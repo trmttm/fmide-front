@@ -1,6 +1,6 @@
 import React from "react";
-import * as setting from "./setting";
-import { footerCSS } from "./setting";
+import * as setting from "../setting";
+import { footerCSS } from "../setting";
 
 export function Footer() {
   return (

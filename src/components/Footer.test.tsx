@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Footer } from "./Footer";
-import * as setting from "./setting";
+import * as setting from "../setting";
 
 test("Footer has correct text", () => {
   render(<Footer />);
