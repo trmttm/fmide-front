@@ -10,8 +10,9 @@ type propsModalAddNewAccount = { show?: boolean; handleClose?: () => void };
 export function ModalAddNewAccount(props: propsModalAddNewAccount) {
   const [lShow, setLShow] = useState(true);
 
-  const show = props.show ? props.show : lShow;
-  const handleClose = props.handleClose ? props.handleClose : () => setLShow;
+  const show = props.show === undefined ? lShow : props.show;
+  const handleClose =
+    props.handleClose === undefined ? () => setLShow : props.handleClose;
   const [userInput, setUserInput] = useState("");
 
   function updateUserInput(event: React.ChangeEvent<HTMLInputElement>) {
