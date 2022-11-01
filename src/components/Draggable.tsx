@@ -45,7 +45,7 @@ export function Draggable(props: BoxProps) {
       style={{
         marginTop: Math.floor(y) + "px",
         marginLeft: Math.floor(x) + "px",
-        float: "left",
+        position: "absolute",
       }}
     >
       {props.children}

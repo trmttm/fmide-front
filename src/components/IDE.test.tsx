@@ -25,4 +25,27 @@ test("Button addNewAccount can be dragged", () => {
   //  I don't know how to test draggable
 });
 
-test("Button addNewAccount adds new account HTML element", () => {});
+test("Button addNewAccount adds new account HTML element", () => {
+  render(<IDE />);
+  testIfNewAccountButtonIsAdded("Account 01");
+  testIfNewAccountButtonIsAdded("Account 02");
+});
+
+function testIfNewAccountButtonIsAdded(newAccountName: string) {
+  clickAddNewButton();
+  inputNewAccountNameAndClickOk(newAccountName);
+  const newAccountButton = screen.getByText(newAccountName);
+  expect(newAccountButton).toBeInTheDocument();
+}
+
+function clickAddNewButton() {
+  const button = getAddNewButton();
+  fireEvent.click(button);
+}
+
+function inputNewAccountNameAndClickOk(newAccountName: string) {
+  const buttonOk = screen.getByText(setting.btnTextOk);
+  const inputElement = screen.getByTestId(setting.testIdInputAddNewAccount);
+  fireEvent.input(inputElement, { target: { value: newAccountName } });
+  fireEvent.click(buttonOk);
+}
