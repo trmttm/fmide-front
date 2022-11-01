@@ -21,4 +21,8 @@ test("Button addNewAccount ask user for account name", () => {
   expect(inputElement).toBeInTheDocument();
 });
 
+test("Button addNewAccount can be dragged", () => {
+  //  I don't know how to test draggable
+});
+
 test("Button addNewAccount adds new account HTML element", () => {});
