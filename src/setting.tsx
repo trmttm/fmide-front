@@ -7,7 +7,7 @@ export const menuItems: keyStrValStr = {
 
 export const footerCSS = {
   backgroundColor: "lightblue",
-  "text-align": "center",
+  textAlign: "center" as const,
 };
 export let textFooter: string = "Copyright ©; fmide.com";
 export let btnTextAddNewAccount: string = "New Account";
