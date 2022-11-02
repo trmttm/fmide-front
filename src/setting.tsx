@@ -15,8 +15,12 @@ export let titleAddNewAccount: string = "Account Name";
 export let defaultAccountName: string = "Account Name";
 export let connectorLineId: string = "connectorLine";
 export const testIdInputAddNewAccount: string = "input addNewAccount";
-export type BoxProps = {
+export type typeDraggableProps = {
   children: React.ReactNode;
+  x?: number;
+  y?: number;
+  setX?: (x: number) => void;
+  setY?: (y: number) => void;
 };
 export type typeLine = {
   id: string | number;
@@ -32,10 +36,11 @@ export const Lines: typeLine[] = [
 
 export function getLineById(id: string | number): typeLine | undefined {
   let lineToReturn = undefined;
-  Lines.forEach((line) => {
+  for (const line of Lines) {
     if (line.id === id) {
       lineToReturn = line;
+      break;
     }
-  });
+  }
   return lineToReturn;
 }

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { BoxProps } from "../setting";
+import { typeDraggableProps } from "../setting";
 
-export function Draggable(props: BoxProps) {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [xFrom, setXFrom] = useState(0);
-  const [yFrom, setYFrom] = useState(0);
+export function Draggable(props: typeDraggableProps) {
+  const [x, setX] = useState(props.x !== undefined ? props.x : 0);
+  const [y, setY] = useState(props.y !== undefined ? props.y : 0);
+  const [xFrom, setXFrom] = useState(x);
+  const [yFrom, setYFrom] = useState(y);
 
   function setStartCoordinates(event: React.MouseEvent) {
     setXFrom(event.clientX);
@@ -33,12 +33,22 @@ export function Draggable(props: BoxProps) {
     event.preventDefault();
   }
 
+  function setXY() {
+    if (props.setX !== undefined) {
+      props.setX(x);
+    }
+    if (props.setY !== undefined) {
+      props.setY(y);
+    }
+  }
+
   return (
     <div
       draggable={true}
       onDragStart={setStartCoordinates}
       onDrag={handleDrag}
       onDragOver={preventSnapBackAnimation}
+      onDragEnd={setXY}
       style={{
         marginTop: Math.floor(y) + "px",
         marginLeft: Math.floor(x) + "px",
