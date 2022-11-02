@@ -1,3 +1,5 @@
+import React from "react";
+
 type keyStrValStr = { [key: string]: string };
 export const menuItems: keyStrValStr = {
   Home: "/home",
@@ -5,10 +7,6 @@ export const menuItems: keyStrValStr = {
   IDE: "/ide",
 };
 
-export const footerCSS = {
-  backgroundColor: "lightblue",
-  textAlign: "center" as const,
-};
 export let textFooter: string = "Copyright ©; fmide.com";
 export let btnTextAddNewAccount: string = "New Account";
 export let btnTextOk: string = "OK";
@@ -17,3 +15,6 @@ export let titleAddNewAccount: string = "Account Name";
 export let defaultAccountName: string = "Account Name";
 export let connectorLineId: string = "connectorLine";
 export const testIdInputAddNewAccount: string = "input addNewAccount";
+export type BoxProps = {
+  children: React.ReactNode;
+};

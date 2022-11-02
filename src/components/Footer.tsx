@@ -1,10 +1,11 @@
 import React from "react";
 import * as setting from "../setting";
-import { footerCSS } from "../setting";
 
 export function Footer() {
   return (
-    <footer style={footerCSS}>
+    <footer
+      style={{ backgroundColor: "lightblue", textAlign: "center" as const }}
+    >
       <p>{setting.textFooter}</p>
     </footer>
   );
