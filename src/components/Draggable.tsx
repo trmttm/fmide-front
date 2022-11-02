@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-
-type BoxProps = {
-  children: React.ReactNode;
-};
+import { BoxProps } from "../setting";
 
 export function Draggable(props: BoxProps) {
   const [x, setX] = useState(0);
