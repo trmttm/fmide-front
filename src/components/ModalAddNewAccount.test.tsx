@@ -19,6 +19,6 @@ function testStateOfAddNewAccount(
   fireEvent.input(inputElement, { target: { value: newAccountName } });
   fireEvent.click(buttonOk);
   accounts.forEach((account, index) => {
-    expect(expectation[index]).toBe(account);
+    expect(expectation[index]).toBe(account.name);
   });
 }
