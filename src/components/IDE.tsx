@@ -8,14 +8,6 @@ import { Line } from "./Line";
 import { Lines, typeLine } from "../entities/line";
 import { Account } from "./Account";
 
-function addNewLineElement(line: typeLine) {
-  return <Line key={line.id} line={line} />;
-}
-
-export function addNewAccountElement(account: typeAccount) {
-  return <Account key={account.id} account={account} />;
-}
-
 export function IDE() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -33,4 +25,12 @@ export function IDE() {
       {accounts.map(addNewAccountElement)}
     </div>
   );
+}
+
+function addNewLineElement(line: typeLine) {
+  return <Line key={line.id} line={line} />;
+}
+
+export function addNewAccountElement(account: typeAccount) {
+  return <Account key={account.id} account={account} />;
 }
