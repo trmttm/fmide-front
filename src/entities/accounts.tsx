@@ -23,12 +23,8 @@ export function createAccount(
     id: nextId,
     x: x === undefined ? 0 : x,
     y: y === undefined ? 0 : y,
-    setX: (x: number) => {
-      setXToAccount(nextId, x);
-    },
-    setY: (y: number) => {
-      setYToAccount(nextId, y);
-    },
+    setX: (x: number) => setXToAccount(nextId, x),
+    setY: (y: number) => setYToAccount(nextId, y),
   };
   accounts.push(newAccount);
   return newAccount;

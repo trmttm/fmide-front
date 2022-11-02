@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
-import { getLineById } from "../entities/line";
+import { createLine, getLineById } from "../entities/line";
 
 function getAddNewButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });
@@ -60,10 +60,7 @@ test("connectorLine is shown", () => {
 test("lines are drawn per Lines model", () => {
   render(<IDE />);
   testIfSpecifiedLineExists(setting.connectorLineId);
-  testIfSpecifiedLineExists(0);
-
   testLinePropertiesMatch(setting.connectorLineId);
-  testLinePropertiesMatch(0);
 });
 
 function testIfSpecifiedLineExists(lineId: string | number) {
