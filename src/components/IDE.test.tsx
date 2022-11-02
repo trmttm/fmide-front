@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
 
@@ -49,3 +49,9 @@ function inputNewAccountNameAndClickOk(newAccountName: string) {
   fireEvent.input(inputElement, { target: { value: newAccountName } });
   fireEvent.click(buttonOk);
 }
+
+test("connectorLine is shown", () => {
+  render(<IDE />);
+  const connectorLine = screen.getByTestId(setting.connectorLineId);
+  expect(connectorLine).toBeInTheDocument();
+});

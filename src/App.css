@@ -7,3 +7,11 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.line {
+    background-color: black;
+    /* border-bottom: 2px solid black; */
+    height: 2px;
+    rotate: 0deg;
+    position: absolute;
+}

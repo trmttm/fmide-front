@@ -15,5 +15,5 @@ export let btnTextOk: string = "OK";
 export let btnTextCancel: string = "Cancel";
 export let titleAddNewAccount: string = "Account Name";
 export let defaultAccountName: string = "Account Name";
-
+export let connectorLineId: string = "connectorLine";
 export const testIdInputAddNewAccount: string = "input addNewAccount";

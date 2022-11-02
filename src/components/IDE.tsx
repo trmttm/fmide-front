@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as setting from "../setting";
+import { connectorLineId } from "../setting";
 import Button from "react-bootstrap/Button";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { Draggable } from "./Draggable";
@@ -22,6 +23,7 @@ export function IDE() {
 
   return (
     <div>
+      <div data-testid={connectorLineId} className={"line"}></div>
       <Draggable key={"draggable-" + setting.btnTextAddNewAccount}>
         <Button variant="secondary" onClick={handleShow}>
           {setting.btnTextAddNewAccount}
