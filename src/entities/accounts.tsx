@@ -8,7 +8,7 @@ export type typeAccount = {
 };
 export const accounts: typeAccount[] = [];
 
-export function accountFactory(
+export function createAccount(
   name: string,
   x?: number,
   y?: number

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
-import { accountFactory, accounts } from "../entities/accounts";
+import { createAccount, accounts } from "../entities/accounts";
 
 type propsModalAddNewAccount = { show?: boolean; handleClose?: () => void };
 
@@ -20,7 +20,7 @@ export function ModalAddNewAccount(props: propsModalAddNewAccount) {
   }
 
   function addNewAccountAndClose() {
-    accounts.push(accountFactory(userInput));
+    accounts.push(createAccount(userInput));
     setUserInput("");
     handleClose();
   }
