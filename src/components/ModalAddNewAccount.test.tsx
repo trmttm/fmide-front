@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import * as setting from "../setting";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
-import { accounts } from "../entities/accounts";
+import { getAccounts } from "../entities/accounts";
 
 test("Button addNewAccount updates state", () => {
   render(<ModalAddNewAccount />);
@@ -18,7 +18,7 @@ function testStateOfAddNewAccount(
   const inputElement = screen.getByTestId(setting.testIdInputAddNewAccount);
   fireEvent.input(inputElement, { target: { value: newAccountName } });
   fireEvent.click(buttonOk);
-  accounts.forEach((account, index) => {
+  getAccounts().forEach((account, index) => {
     expect(expectation[index]).toBe(account.name);
   });
 }

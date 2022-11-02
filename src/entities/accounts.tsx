@@ -6,7 +6,11 @@ export type typeAccount = {
   setX: (x: number) => void;
   setY: (y: number) => void;
 };
-export const accounts: typeAccount[] = [];
+const accounts: typeAccount[] = [];
+
+export function getAccounts(): typeAccount[] {
+  return accounts;
+}
 
 export function createAccount(
   name: string,
@@ -14,7 +18,7 @@ export function createAccount(
   y?: number
 ): typeAccount {
   const nextId: number = accounts.length;
-  return {
+  const newAccount = {
     name: name,
     id: nextId,
     x: x === undefined ? 0 : x,
@@ -26,6 +30,8 @@ export function createAccount(
       setYToAccount(nextId, y);
     },
   };
+  accounts.push(newAccount);
+  return newAccount;
 }
 
 function setXToAccount(id: number, x: number) {

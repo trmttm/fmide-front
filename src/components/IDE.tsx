@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
-import { accounts, typeAccount } from "../entities/accounts";
+import { getAccounts, typeAccount } from "../entities/accounts";
 import { Line } from "./Line";
 import { Lines, typeLine } from "../entities/line";
 import { Account } from "./Account";
@@ -17,7 +17,7 @@ export function IDE() {
       {Lines.map(addNewLineElement)}
       <Controller commands={commands} />
       <ModalAddNewAccount show={show} handleClose={handleClose} />
-      {accounts.map(addNewAccountElement)}
+      {getAccounts().map(addNewAccountElement)}
     </div>
   );
 }
