@@ -5,6 +5,7 @@ import { Line } from "./Line";
 import { Lines, typeLine } from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
+import { Connectable } from "./Connectable";
 
 export function IDE() {
   const [show, setShow] = useState(false);
@@ -26,5 +27,9 @@ function addNewLineElement(line: typeLine) {
 }
 
 export function addNewAccountElement(account: typeAccount) {
-  return <Account key={account.id} account={account} />;
+  return (
+    <Connectable key={account.id} account={account}>
+      <Account key={account.id} account={account} />
+    </Connectable>
+  );
 }
