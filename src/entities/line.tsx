@@ -41,7 +41,7 @@ const Lines: typeLine[] = [
     setX: (x: number) => setXToLine(connectorLineId, x),
     setY: (y: number) => setYToLine(connectorLineId, y),
     setWidth: (width: number) => setWidthToLine(connectorLineId, width),
-    setAngle: (angle: number) => setWidthToLine(connectorLineId, angle),
+    setAngle: (angle: number) => setAngleToLine(connectorLineId, angle),
   },
 ];
 
