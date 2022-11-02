@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { typeDraggableProps } from "../setting";
+
+export type typeDraggableProps = {
+  children: React.ReactNode;
+  x?: number;
+  y?: number;
+  setX?: (x: number) => void;
+  setY?: (y: number) => void;
+};
 
 export function Draggable(props: typeDraggableProps) {
   const [x, setX] = useState(props.x !== undefined ? props.x : 0);

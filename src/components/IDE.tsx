@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import * as setting from "../setting";
-import { Lines, typeLine } from "../setting";
 import Button from "react-bootstrap/Button";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { Draggable } from "./Draggable";
-import { accounts, typeAccount } from "../states";
+import { accounts, typeAccount } from "../entities/accounts";
 import { Line } from "./Line";
+import { Lines, typeLine } from "../entities/line";
 
 function addNewAccountButton(account: typeAccount) {
   return (

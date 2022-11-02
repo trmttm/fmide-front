@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
-import { getLineById } from "../setting";
+import { getLineById } from "../entities/line";
 
 function getAddNewButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });

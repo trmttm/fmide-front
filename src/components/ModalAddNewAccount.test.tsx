@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import * as setting from "../setting";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
-import { accounts } from "../states";
+import { accounts } from "../entities/accounts";
 
 test("Button addNewAccount updates state", () => {
   render(<ModalAddNewAccount />);
