@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as state from "../entities/states";
 
 export type typeDraggableProps = {
   children: React.ReactNode;
@@ -14,12 +15,12 @@ export function Draggable(props: typeDraggableProps) {
   const [xFrom, setXFrom] = useState(x);
   const [yFrom, setYFrom] = useState(y);
 
-  function setStartCoordinates(event: React.MouseEvent) {
+  function setStartCoordinates(event: React.DragEvent<HTMLDivElement>) {
     setXFrom(event.clientX);
     setYFrom(event.clientY);
   }
 
-  function handleDrag(event: React.MouseEvent) {
+  function handleDrag(event: React.DragEvent<HTMLDivElement>) {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
     const deltaX = mouseX - xFrom;
@@ -36,11 +37,11 @@ export function Draggable(props: typeDraggableProps) {
     }
   }
 
-  function preventSnapBackAnimation(event: React.MouseEvent) {
+  function preventSnapBackAnimation(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
   }
 
-  function setXY() {
+  function setXY(event: React.DragEvent<HTMLDivElement>) {
     if (props.setX !== undefined) {
       props.setX(x);
     }
@@ -52,10 +53,12 @@ export function Draggable(props: typeDraggableProps) {
   return (
     <div
       draggable={true}
-      onDragStart={setStartCoordinates}
-      onDrag={handleDrag}
-      onDragOver={preventSnapBackAnimation}
-      onDragEnd={setXY}
+      onDragStart={(event) => wrapperDraggingMode(setStartCoordinates, event)}
+      onDrag={(event) => wrapperDraggingMode(handleDrag, event)}
+      onDragOver={(event) =>
+        wrapperDraggingMode(preventSnapBackAnimation, event)
+      }
+      onDragEnd={(event) => wrapperDraggingMode(setXY, event)}
       style={{
         marginTop: Math.floor(y) + "px",
         marginLeft: Math.floor(x) + "px",
@@ -65,4 +68,15 @@ export function Draggable(props: typeDraggableProps) {
       {props.children}
     </div>
   );
+}
+
+function wrapperDraggingMode(
+  f: (args: any) => void,
+  event: React.DragEvent<HTMLDivElement>
+) {
+  if (state.isDraggingMode()) {
+    f(event);
+  } else {
+    event.preventDefault();
+  }
 }

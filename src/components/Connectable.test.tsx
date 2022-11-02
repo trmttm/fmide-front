@@ -18,7 +18,7 @@ test("Connectable metaClick turns on Connecting Mode", () => {
   let connectableTo = renderConnectable(accountTo);
 
   fireEvent.mouseDown(connectableFrom, { metaKey: true });
-  expect(state.getConnectionMode()).toBe(true);
+  expect(state.isConnectingMode()).toBe(true);
   expect(state.getConnectionFromAccount()).toBe(accountFrom);
 
   fireEvent.mouseUp(connectableTo, { metaKey: true });

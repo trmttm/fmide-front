@@ -16,6 +16,8 @@ export function Connectable(props: {
     if (event.metaKey) {
       state.turnOnConnectingMode();
       state.setConnectionFromAccount(account);
+    } else {
+      state.turnOffConnectingMode();
     }
   }
 
@@ -24,6 +26,8 @@ export function Connectable(props: {
       const connectionFromAccount = state.getConnectionFromAccount();
       if (connectionFromAccount !== null) {
         state.connectAccounts(connectionFromAccount, account);
+      } else {
+        state.turnOffConnectingMode();
       }
     }
     state.turnOffConnectingMode();
