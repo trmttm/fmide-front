@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
-export function Line(props: { testid?: string }) {
-  const [left, setLeft] = useState(0);
-  const [top, setTop] = useState(0);
-  const [angle, setAngle] = useState(0);
+type LineParams = {
+  x?: number;
+  y?: number;
+  width?: number;
+  angle?: number;
+  id?: string | number;
+};
+
+export function Line(props: LineParams) {
   const css: {} = {
     backgroundColor: "black",
     /* border-bottom: 2px solid black; */
     position: "absolute",
     height: "2px",
-    marginLeft: left + "px",
-    marginTop: top + "px",
-    rotate: angle + "deg",
+    marginLeft: (props.x === undefined ? 0 : props.x) + "px",
+    marginTop: (props.y === undefined ? 0 : props.y) + "px",
+    width: (props.width === undefined ? 0 : props.width) + "px",
+    rotate: (props.angle === undefined ? 0 : props.angle) + "deg",
   };
-  if (props.testid !== undefined) {
-    return <div data-testid={props.testid} style={css}></div>;
-  } else {
-    return <div style={css}></div>;
-  }
+  return <div data-testid={props.id} style={css}></div>;
 }

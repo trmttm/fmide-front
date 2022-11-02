@@ -18,3 +18,14 @@ export const testIdInputAddNewAccount: string = "input addNewAccount";
 export type BoxProps = {
   children: React.ReactNode;
 };
+export type typeLine = {
+  id: string | number;
+  x: number;
+  y: number;
+  width: number;
+  angle: number;
+};
+export const Lines: typeLine[] = [
+  { id: connectorLineId, x: 10, y: 20, width: 30, angle: 30 },
+  { id: 0, x: 10, y: 20, width: 30, angle: 30 },
+];

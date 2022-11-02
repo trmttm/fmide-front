@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
 
@@ -55,3 +55,14 @@ test("connectorLine is shown", () => {
   const connectorLine = screen.getByTestId(setting.connectorLineId);
   expect(connectorLine).toBeInTheDocument();
 });
+
+test("lines are drawn per Lines model", () => {
+  render(<IDE />);
+  testIfSpecifiedLineExists(setting.connectorLineId);
+  testIfSpecifiedLineExists(0);
+});
+
+function testIfSpecifiedLineExists(lineId: string | number) {
+  const connectorLine = screen.getByTestId(lineId);
+  expect(connectorLine).toBeInTheDocument();
+}
