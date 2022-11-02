@@ -40,7 +40,7 @@ export function createLine(
     setX: (x: number) => setXToLine(Lines.length, x),
     setY: (y: number) => setYToLine(Lines.length, y),
     setWidth: (width: number) => setWidthToLine(Lines.length, width),
-    setAngle: (angle: number) => setWidthToLine(Lines.length, angle),
+    setAngle: (angle: number) => setAngleToLine(Lines.length, angle),
   };
   Lines.push(newLine);
 }
