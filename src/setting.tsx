@@ -1,5 +1,3 @@
-import React from "react";
-
 type keyStrValStr = { [key: string]: string };
 export const menuItems: keyStrValStr = {
   Home: "/home",
