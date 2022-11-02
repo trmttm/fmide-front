@@ -8,16 +8,17 @@ type LineParams = {
   id?: string | number;
 };
 
-export function Line(props: LineParams) {
+export function Line(props: { line: LineParams }) {
+  const line: LineParams = props.line;
   const css: {} = {
     backgroundColor: "black",
     /* border-bottom: 2px solid black; */
     position: "absolute",
     height: "2px",
-    marginLeft: (props.x === undefined ? 0 : props.x) + "px",
-    marginTop: (props.y === undefined ? 0 : props.y) + "px",
-    width: (props.width === undefined ? 0 : props.width) + "px",
-    rotate: (props.angle === undefined ? 0 : props.angle) + "deg",
+    marginLeft: (line.x === undefined ? 0 : line.x) + "px",
+    marginTop: (line.y === undefined ? 0 : line.y) + "px",
+    width: (line.width === undefined ? 0 : line.width) + "px",
+    rotate: (line.angle === undefined ? 0 : line.angle) + "deg",
   };
-  return <div data-testid={props.id} style={css}></div>;
+  return <div data-testid={line.id} style={css}></div>;
 }

@@ -8,20 +8,11 @@ import { Line } from "./Line";
 import { Lines, typeLine } from "../entities/line";
 import { Account } from "./Account";
 
-function addLines(line: typeLine) {
-  return (
-    <Line
-      key={line.id}
-      id={line.id}
-      x={line.x}
-      y={line.y}
-      width={line.width}
-      angle={line.angle}
-    />
-  );
+function addNewLineElement(line: typeLine) {
+  return <Line key={line.id} line={line} />;
 }
 
-export function addNewAccountButton(account: typeAccount) {
+export function addNewAccountElement(account: typeAccount) {
   return <Account key={account.id} account={account} />;
 }
 
@@ -32,14 +23,14 @@ export function IDE() {
 
   return (
     <div id={"IDE"}>
-      {Lines.map(addLines)}
+      {Lines.map(addNewLineElement)}
       <Draggable key={"draggable-" + setting.btnTextAddNewAccount}>
         <Button variant="secondary" onClick={handleShow}>
           {setting.btnTextAddNewAccount}
         </Button>
       </Draggable>
       <ModalAddNewAccount show={show} handleClose={handleClose} />
-      {accounts.map(addNewAccountButton)}
+      {accounts.map(addNewAccountElement)}
     </div>
   );
 }
