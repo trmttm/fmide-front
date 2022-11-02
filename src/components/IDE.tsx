@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as setting from "../setting";
-import { connectorLineId, Lines, typeLine } from "../setting";
+import { Lines, typeLine } from "../setting";
 import Button from "react-bootstrap/Button";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { Draggable } from "./Draggable";
