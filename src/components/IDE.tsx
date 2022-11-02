@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { getAccounts, typeAccount } from "../entities/accounts";
 import { Line } from "./Line";
-import { getLines, typeLine } from "../entities/line";
+import { drawConnectorLine, getLines, typeLine } from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
@@ -31,7 +31,7 @@ export function addNewAccountElement(account: typeAccount) {
     <Connectable
       key={account.id}
       account={account}
-      // drawConnectorLineElement={drawConnectorLine}
+      drawConnectorLineElement={drawConnectorLine}
     >
       <Account key={account.id} account={account} />
     </Connectable>

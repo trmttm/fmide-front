@@ -1,4 +1,5 @@
 import { connectorLineId } from "../setting";
+import * as util from "../utilities/utilities";
 
 export type typeLine = {
   id: string | number;
@@ -11,6 +12,25 @@ export type typeLine = {
   setWidth: (width: number) => void;
   setAngle: (angle: number) => void;
 };
+
+let [connectorX1, connectorY1] = [0, 0];
+
+export function setConnectorX1(x: number) {
+  connectorX1 = x;
+}
+
+export function setConnectorY1(y: number) {
+  connectorY1 = y;
+}
+
+export function getConnectorX1(): number {
+  return connectorX1;
+}
+
+export function getConnectorY1(): number {
+  return connectorY1;
+}
+
 const Lines: typeLine[] = [
   {
     id: connectorLineId,
@@ -86,4 +106,28 @@ export function getLineById(id: string | number): typeLine | undefined {
     }
   }
   return lineToReturn;
+}
+
+function getConnectorLine(): typeLine {
+  return Lines[0]; //Don't want to use getLineById. Avoid unnecessary loop.
+}
+
+export function drawConnectorLine(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number
+) {
+  const connectorLine = getConnectorLine();
+
+  const width = util.getDistanceBetweenPoints(x1, y1, x2, y2);
+  const angle = util.getAngleOfTwoPoints(x1, y1, x2, y2);
+  const x = Math.round((x2 + x1 - width) / 2);
+  const y = Math.round((y2 + y1) / 2);
+
+  connectorLine.setX(x);
+  connectorLine.setY(y);
+  connectorLine.setWidth(width);
+  connectorLine.setAngle(angle);
+  console.log(JSON.stringify(connectorLine));
 }

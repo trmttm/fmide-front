@@ -1,39 +1,23 @@
 import React from "react";
 import { typeAccount } from "../entities/accounts";
 import * as state from "../entities/states";
+import * as line from "../entities/line";
 
 export function Connectable(props: {
   children: React.ReactNode;
   account: typeAccount;
-  drawConnectorLineElement?: (
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number
-  ) => void;
 }) {
   const account = props.account;
-  const drawLineMethod = props.drawConnectorLineElement;
   const style: {} = {
     position: "absolute",
     backgroundColor: "yellow",
   };
 
-  let [x1, y1, x2, y2] = [0, 0, 0, 0];
-
   function setConnectionFrom(event: React.MouseEvent<HTMLDivElement>) {
     state.turnOnConnectingMode();
     state.setConnectionFromAccount(account);
-    x1 = event.clientX;
-    y1 = event.clientY;
-  }
-
-  function drawConnectorLine(event: React.MouseEvent<HTMLDivElement>) {
-    x2 = event.clientX;
-    y2 = event.clientY;
-    if (drawLineMethod !== undefined) {
-      drawLineMethod(x1, y1, x2, y2);
-    }
+    line.setConnectorX1(event.clientX);
+    line.setConnectorY1(event.clientY);
   }
 
   function setConnectionTo(event: React.MouseEvent<HTMLDivElement>) {
@@ -47,8 +31,7 @@ export function Connectable(props: {
     <div
       style={style}
       onMouseDown={(event) => wrapperOnlyIfMetaKey(setConnectionFrom, event)}
-      onMouseMove={drawConnectorLine}
-      onMouseUp={setConnectionTo}
+      onMouseUp={(event) => wrapperOnlyIfMetaKey(setConnectionTo, event)}
       data-testid={"connectable-" + account.id}
     >
       {props.children}
