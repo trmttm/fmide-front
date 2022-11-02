@@ -7,7 +7,7 @@ import { Account, accounts } from "../states";
 
 function addNewAccountButton(account: Account) {
   return (
-    <Draggable>
+    <Draggable key={"draggable-account-" + account.id}>
       <Button variant="secondary" key={account.id}>
         {account.name}
       </Button>
@@ -22,7 +22,7 @@ export function IDE() {
 
   return (
     <div>
-      <Draggable>
+      <Draggable key={"draggable-" + setting.btnTextAddNewAccount}>
         <Button variant="secondary" onClick={handleShow}>
           {setting.btnTextAddNewAccount}
         </Button>
