@@ -46,7 +46,7 @@ function setYToAccount(id: number, y: number) {
 
 function getAccountById(id: number): typeAccount | undefined {
   let accountToReturn = undefined;
-  for (let account of accounts) {
+  for (const account of accounts) {
     if (account.id === id) {
       accountToReturn = account;
       break;
