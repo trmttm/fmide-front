@@ -4,10 +4,10 @@ import { Lines, typeLine } from "../setting";
 import Button from "react-bootstrap/Button";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { Draggable } from "./Draggable";
-import { Account, accounts } from "../states";
+import { typeAccount, accounts } from "../states";
 import { Line } from "./Line";
 
-function addNewAccountButton(account: Account) {
+function addNewAccountButton(account: typeAccount) {
   return (
     <Draggable key={"draggable-account-" + account.id}>
       <Button variant="secondary" key={account.id}>
