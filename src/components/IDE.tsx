@@ -6,22 +6,7 @@ import { Draggable } from "./Draggable";
 import { accounts, typeAccount } from "../entities/accounts";
 import { Line } from "./Line";
 import { Lines, typeLine } from "../entities/line";
-
-function addNewAccountButton(account: typeAccount) {
-  return (
-    <Draggable
-      key={"draggable-account-" + account.id}
-      x={account.x}
-      y={account.y}
-      setX={account.setX}
-      setY={account.setY}
-    >
-      <Button variant="secondary" key={account.id}>
-        {account.name}
-      </Button>
-    </Draggable>
-  );
-}
+import { Account } from "./Account";
 
 function addLines(line: typeLine) {
   return (
@@ -34,6 +19,10 @@ function addLines(line: typeLine) {
       angle={line.angle}
     />
   );
+}
+
+export function addNewAccountButton(account: typeAccount) {
+  return <Account key={account.id} account={account} />;
 }
 
 export function IDE() {
