@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { getAccounts, typeAccount } from "../entities/accounts";
 import { Line } from "./Line";
-import { Lines, typeLine } from "../entities/line";
+import { getLines, typeLine } from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
@@ -14,7 +14,7 @@ export function IDE() {
   const commands = { addNewAccount: handleShow };
   return (
     <div id={"IDE"}>
-      {Lines.map(addNewLineElement)}
+      {getLines().map(addNewLineElement)}
       <Controller commands={commands} />
       <ModalAddNewAccount show={show} handleClose={handleClose} />
       {getAccounts().map(addNewAccountElement)}
@@ -28,7 +28,11 @@ function addNewLineElement(line: typeLine) {
 
 export function addNewAccountElement(account: typeAccount) {
   return (
-    <Connectable key={account.id} account={account}>
+    <Connectable
+      key={account.id}
+      account={account}
+      // drawConnectorLineElement={drawConnectorLine}
+    >
       <Account key={account.id} account={account} />
     </Connectable>
   );
