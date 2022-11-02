@@ -1,5 +1,6 @@
 import React from "react";
 import { typeAccount } from "../entities/accounts";
+import * as state from "../entities/states";
 
 export function Connectable(props: {
   children: React.ReactNode;
@@ -13,16 +14,19 @@ export function Connectable(props: {
 
   function setConnectionFrom(event: React.MouseEvent<HTMLDivElement>) {
     if (event.metaKey) {
-      console.log("Turn on Connecting Mode");
-      console.log("Connecting from " + account.name + "[" + account.id + "]");
+      state.turnOnConnectingMode();
+      state.setConnectionFromAccount(account);
     }
   }
 
   function setConnectionTo(event: React.MouseEvent<HTMLDivElement>) {
     if (event.metaKey) {
-      console.log("Connecting to " + account.name + "[" + account.id + "]");
+      const connectionFromAccount = state.getConnectionFromAccount();
+      if (connectionFromAccount !== null) {
+        state.connectAccounts(connectionFromAccount, account);
+      }
     }
-    console.log("Turn off Connecting Mode");
+    state.turnOffConnectingMode();
   }
 
   return (
@@ -30,6 +34,7 @@ export function Connectable(props: {
       style={style}
       onMouseDown={setConnectionFrom}
       onMouseUp={setConnectionTo}
+      data-testid={"connectable-" + account.id}
     >
       {props.children}
     </div>
