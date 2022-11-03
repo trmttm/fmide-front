@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import { attachObservers, typeLine, typeLineObservers } from "../entities/line";
 
-type LineParams = {
-  x?: number;
-  y?: number;
-  width?: number;
-  angle?: number;
-  id?: string | number;
-};
+export function Line(props: { line: typeLine }) {
+  const line: typeLine = props.line;
+  const [x, setX] = useState(line.x);
+  const [y, setY] = useState(line.y);
+  const [width, setWidth] = useState(line.width);
+  const [angle, setAngle] = useState(line.angle);
+  const observers: typeLineObservers = {
+    setX: setX,
+    setY: setY,
+    setWidth: setWidth,
+    setAngle: setAngle,
+  };
+  attachObservers(line, observers);
 
-export function Line(props: { line: LineParams }) {
-  const line: LineParams = props.line;
   const css: {} = {
     backgroundColor: "black",
     /* border-bottom: 2px solid black; */
     position: "absolute",
     height: "2px",
-    marginLeft: (line.x === undefined ? 0 : line.x) + "px",
-    marginTop: (line.y === undefined ? 0 : line.y) + "px",
-    width: (line.width === undefined ? 0 : line.width) + "px",
-    rotate: (line.angle === undefined ? 0 : line.angle) + "deg",
+    marginLeft: x + "px",
+    marginTop: y + "px",
+    width: width + "px",
+    rotate: angle + "deg",
   };
   return <div data-testid={line.id} style={css}></div>;
 }
