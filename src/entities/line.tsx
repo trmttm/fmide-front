@@ -11,6 +11,7 @@ export type typeLine = {
   setY: (y: number) => void;
   setWidth: (width: number) => void;
   setAngle: (angle: number) => void;
+  observers?: null | typeLineObservers;
 };
 
 let [connectorX1, connectorY1] = [0, 0];
@@ -31,19 +32,18 @@ export function getConnectorY1(): number {
   return connectorY1;
 }
 
-const Lines: typeLine[] = [
-  {
-    id: connectorLineId,
-    x: 10,
-    y: 20,
-    width: 30,
-    angle: 30,
-    setX: (x: number) => setXToLine(connectorLineId, x),
-    setY: (y: number) => setYToLine(connectorLineId, y),
-    setWidth: (width: number) => setWidthToLine(connectorLineId, width),
-    setAngle: (angle: number) => setAngleToLine(connectorLineId, angle),
-  },
-];
+const connectorLine: typeLine = {
+  id: connectorLineId,
+  x: 0,
+  y: 0,
+  width: 0,
+  angle: 0,
+  setX: (x: number) => setXToLine(connectorLineId, x),
+  setY: (y: number) => setYToLine(connectorLineId, y),
+  setWidth: (width: number) => setWidthToLine(connectorLineId, width),
+  setAngle: (angle: number) => setAngleToLine(connectorLineId, angle),
+};
+const Lines: typeLine[] = [];
 
 export function createLine(
   x?: number,
@@ -73,6 +73,9 @@ function setXToLine(id: number | string, x: number) {
   const line = getLineById(id);
   if (line !== undefined) {
     line.x = x;
+    if (line.observers !== null && line.observers !== undefined) {
+      line.observers.setX(x);
+    }
   }
 }
 
@@ -80,6 +83,9 @@ function setYToLine(id: number | string, y: number) {
   const line = getLineById(id);
   if (line !== undefined) {
     line.y = y;
+    if (line.observers !== null && line.observers !== undefined) {
+      line.observers.setY(y);
+    }
   }
 }
 
@@ -87,6 +93,9 @@ function setWidthToLine(id: number | string, width: number) {
   const line = getLineById(id);
   if (line !== undefined) {
     line.width = width;
+    if (line.observers !== null && line.observers !== undefined) {
+      line.observers.setWidth(width);
+    }
   }
 }
 
@@ -94,22 +103,29 @@ function setAngleToLine(id: number | string, angle: number) {
   const line = getLineById(id);
   if (line !== undefined) {
     line.angle = angle;
+    if (line.observers !== null && line.observers !== undefined) {
+      line.observers.setAngle(angle);
+    }
   }
 }
 
 export function getLineById(id: string | number): typeLine | undefined {
   let lineToReturn = undefined;
-  for (const line of Lines) {
-    if (line.id === id) {
-      lineToReturn = line;
-      break;
+  if (id === connectorLineId) {
+    lineToReturn = getConnectorLine();
+  } else {
+    for (const line of Lines) {
+      if (line.id === id) {
+        lineToReturn = line;
+        break;
+      }
     }
   }
   return lineToReturn;
 }
 
-function getConnectorLine(): typeLine {
-  return Lines[0]; //Don't want to use getLineById. Avoid unnecessary loop.
+export function getConnectorLine(): typeLine {
+  return connectorLine;
 }
 
 export function drawConnectorLine(
@@ -130,4 +146,15 @@ export function drawConnectorLine(
   connectorLine.setWidth(width);
   connectorLine.setAngle(angle);
   console.log(JSON.stringify(connectorLine));
+}
+
+export type typeLineObservers = {
+  setX: (x: number) => void;
+  setY: (y: number) => void;
+  setWidth: (width: number) => void;
+  setAngle: (angle: number) => void;
+};
+
+export function attachObservers(line: typeLine, observers: typeLineObservers) {
+  line.observers = observers;
 }
