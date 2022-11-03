@@ -19,17 +19,15 @@ export function IDE() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const commands = { addNewAccount: handleShow };
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    drawConnectorLine(getConnectorX1(), getConnectorY1(), e.clientX, e.clientY);
+  }
+
   return (
     <div
       id={"IDE"}
-      onMouseMove={(e) =>
-        drawConnectorLine(
-          getConnectorX1(),
-          getConnectorY1(),
-          e.clientX,
-          e.clientY
-        )
-      }
+      onMouseMove={handleMouseMove}
       style={{ backgroundColor: "yellow", height: "90vh" }}
     >
       <Line key={getConnectorLine().id} line={getConnectorLine()} />
