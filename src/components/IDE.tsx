@@ -20,20 +20,19 @@ export function IDE() {
   const handleShow = () => setShow(true);
   const commands = { addNewAccount: handleShow };
   return (
-    <div id={"IDE"}>
-      <div
-        onMouseMove={(e) =>
-          drawConnectorLine(
-            getConnectorX1(),
-            getConnectorY1(),
-            e.clientX,
-            e.clientY
-          )
-        }
-        style={{ backgroundColor: "yellow", height: "90vh" }}
-      >
-        <Line key={getConnectorLine().id} line={getConnectorLine()} />
-      </div>
+    <div
+      id={"IDE"}
+      onMouseMove={(e) =>
+        drawConnectorLine(
+          getConnectorX1(),
+          getConnectorY1(),
+          e.clientX,
+          e.clientY
+        )
+      }
+      style={{ backgroundColor: "yellow", height: "90vh" }}
+    >
+      <Line key={getConnectorLine().id} line={getConnectorLine()} />
       {getLines().map(addNewLineElement)}
       <Controller commands={commands} />
       <ModalAddNewAccount show={show} handleClose={handleClose} />
