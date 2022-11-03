@@ -2,41 +2,31 @@ import React, { useState } from "react";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { getAccounts, typeAccount } from "../entities/accounts";
 import { Line } from "./Line";
-import {
-  drawConnectorLine,
-  getConnectorLine,
-  getConnectorX1,
-  getConnectorY1,
-  getLines,
-  typeLine,
-} from "../entities/line";
+import { drawCLine, getCLine, getLines, typeLine } from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
 
 export function IDE() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
   const commands = { addNewAccount: handleShow };
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    drawConnectorLine(getConnectorX1(), getConnectorY1(), e.clientX, e.clientY);
-  }
-
+  const connectorLine = getCLine();
+  const style = { backgroundColor: "yellow", height: "90vh" };
   return (
-    <div
-      id={"IDE"}
-      onMouseMove={handleMouseMove}
-      style={{ backgroundColor: "yellow", height: "90vh" }}
-    >
-      <Line key={getConnectorLine().id} line={getConnectorLine()} />
+    <div id={"IDE"} onMouseMove={handleMouseMove} style={style}>
+      <Line key={connectorLine.id} line={connectorLine} />
       {getLines().map(addNewLineElement)}
       <Controller commands={commands} />
-      <ModalAddNewAccount show={show} handleClose={handleClose} />
+      <ModalAddNewAccount show={showModal} handleClose={handleClose} />
       {getAccounts().map(addNewAccountElement)}
     </div>
   );
+}
+
+function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+  drawCLine(e.clientX, e.clientY);
 }
 
 function addNewLineElement(line: typeLine) {

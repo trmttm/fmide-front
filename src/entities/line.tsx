@@ -24,14 +24,6 @@ export function setConnectorY1(y: number) {
   connectorY1 = y;
 }
 
-export function getConnectorX1(): number {
-  return connectorX1;
-}
-
-export function getConnectorY1(): number {
-  return connectorY1;
-}
-
 const connectorLine: typeLine = {
   id: connectorLineId,
   x: 0,
@@ -112,7 +104,7 @@ function setAngleToLine(id: number | string, angle: number) {
 export function getLineById(id: string | number): typeLine | undefined {
   let lineToReturn = undefined;
   if (id === connectorLineId) {
-    lineToReturn = getConnectorLine();
+    lineToReturn = getCLine();
   } else {
     for (const line of Lines) {
       if (line.id === id) {
@@ -124,17 +116,14 @@ export function getLineById(id: string | number): typeLine | undefined {
   return lineToReturn;
 }
 
-export function getConnectorLine(): typeLine {
+export function getCLine(): typeLine {
   return connectorLine;
 }
 
-export function drawConnectorLine(
-  x1: number,
-  y1: number,
-  x2: number,
-  y2: number
-) {
-  const connectorLine = getConnectorLine();
+export function drawCLine(x2: number, y2: number) {
+  const x1: number = connectorX1;
+  const y1: number = connectorY1;
+  const connectorLine = getCLine();
 
   const width = util.getDistanceBetweenPoints(x1, y1, x2, y2);
   const angle = util.getAngleOfTwoPoints(x1, y1, x2, y2);
