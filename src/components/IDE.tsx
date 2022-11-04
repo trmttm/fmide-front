@@ -17,16 +17,16 @@ export function IDE() {
   const style = { backgroundColor: "white", height: "90vh" };
   const myRef: React.MutableRefObject<any> = React.useRef(null);
 
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (states.isConnectingMode()) {
-      line.drawCLine(e.clientX, e.clientY - myRef.current.offsetTop);
-    }
-  }
-
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {
       line.setConnectorX1(e.clientX);
       line.setConnectorY1(e.clientY - myRef.current.offsetTop);
+    }
+  }
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (states.isConnectingMode()) {
+      line.drawCLine(e.clientX, e.clientY - myRef.current.offsetTop);
     }
   }
 
