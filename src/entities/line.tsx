@@ -136,6 +136,13 @@ export function drawCLine(x2: number, y2: number) {
   connectorLine.setAngle(angle);
 }
 
+export function removeCLine() {
+  connectorLine.setX(0);
+  connectorLine.setY(0);
+  connectorLine.setWidth(0);
+  connectorLine.setAngle(0);
+}
+
 export type typeLineObservers = {
   setX: (x: number) => void;
   setY: (y: number) => void;
