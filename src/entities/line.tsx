@@ -127,22 +127,25 @@ export function getCLine(): typeLine {
 }
 
 export function drawCLine(x2: number, y2: number) {
-  const x1: number = connectorX1;
-  const y1: number = connectorY1;
-  const connectorLine = getCLine();
+  if (isDrawingCline) {
+    const x1: number = connectorX1;
+    const y1: number = connectorY1;
+    const connectorLine = getCLine();
 
-  const width = util.getDistanceBetweenPoints(x1, y1, x2, y2);
-  const angle = util.getAngleOfTwoPoints(x1, y1, x2, y2);
-  const x = Math.round((x2 + x1 - width) / 2);
-  const y = Math.round((y2 + y1) / 2);
+    const width = util.getDistanceBetweenPoints(x1, y1, x2, y2);
+    const angle = util.getAngleOfTwoPoints(x1, y1, x2, y2);
+    const x = Math.round((x2 + x1 - width) / 2);
+    const y = Math.round((y2 + y1) / 2);
 
-  connectorLine.setX(x);
-  connectorLine.setY(y);
-  connectorLine.setWidth(width);
-  connectorLine.setAngle(angle);
+    connectorLine.setX(x);
+    connectorLine.setY(y);
+    connectorLine.setWidth(width);
+    connectorLine.setAngle(angle);
+  }
 }
 
 export function removeCLine() {
+  isDrawingCline = false;
   connectorLine.setX(0);
   connectorLine.setY(0);
   connectorLine.setWidth(0);
