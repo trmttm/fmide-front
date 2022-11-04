@@ -16,8 +16,6 @@ export function Connectable(props: {
   function setConnectionFrom(event: React.MouseEvent<HTMLDivElement>) {
     state.turnOnConnectingMode();
     state.setConnectionFromAccount(account);
-    line.setConnectorX1(event.clientX);
-    line.setConnectorY1(event.clientY);
   }
 
   function setConnectionTo(event: React.MouseEvent<HTMLDivElement>) {
