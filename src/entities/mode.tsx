@@ -9,18 +9,6 @@ export function isConnectingMode(): boolean {
   return connectionMode;
 }
 
-export function turnOnDraggingMode() {
-  connectionMode = false;
-  draggingMode = true;
-  console.log("Turn on Dragging Mode");
-}
-
-export function turnOffDraggingMode() {
-  connectionMode = true;
-  draggingMode = false;
-  console.log("Turn off Dragging Mode");
-}
-
 export function turnOnConnectingMode() {
   connectionMode = true;
   draggingMode = false;
