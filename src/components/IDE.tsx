@@ -30,7 +30,7 @@ export function IDE() {
     }
   }
 
-  function handleMouseUp(e: React.MouseEvent<HTMLDivElement>) {
+  function handleMouseUp(_: React.MouseEvent<HTMLDivElement>) {
     line.removeCLine();
     states.turnOffConnectingMode();
   }
@@ -41,7 +41,7 @@ export function IDE() {
     }
   }
 
-  function onKeyUp(e: React.KeyboardEvent<HTMLDivElement>) {
+  function onKeyUp(_: React.KeyboardEvent<HTMLDivElement>) {
     line.removeCLine();
     states.turnOffConnectingMode();
   }

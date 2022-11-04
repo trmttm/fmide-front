@@ -1,7 +1,6 @@
 import React from "react";
 import { typeAccount } from "../entities/accounts";
 import * as state from "../entities/states";
-import * as line from "../entities/line";
 
 export function Connectable(props: {
   children: React.ReactNode;
@@ -13,12 +12,12 @@ export function Connectable(props: {
     backgroundColor: "yellow",
   };
 
-  function setConnectionFrom(event: React.MouseEvent<HTMLDivElement>) {
+  function setConnectionFrom(_: React.MouseEvent<HTMLDivElement>) {
     state.turnOnConnectingMode();
     state.setConnectionFromAccount(account);
   }
 
-  function setConnectionTo(event: React.MouseEvent<HTMLDivElement>) {
+  function setConnectionTo(_: React.MouseEvent<HTMLDivElement>) {
     const connectionFromAccount = state.getConnectionFromAccount();
     if (connectionFromAccount !== null) {
       state.connectAccounts(connectionFromAccount, account);
