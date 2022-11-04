@@ -13,9 +13,15 @@ export function IDE() {
   const handleShow = () => setShowModal(true);
   const commands = { addNewAccount: handleShow };
   const connectorLine = getCLine();
-  const style = { backgroundColor: "yellow", height: "90vh" };
+  const style = { backgroundColor: "white", height: "90vh" };
+  const myRef: any = React.useRef(null);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    drawCLine(e.clientX, e.clientY - myRef.current.offsetTop);
+  }
+
   return (
-    <div id={"IDE"} onMouseMove={handleMouseMove} style={style}>
+    <div id={"IDE"} onMouseMove={handleMouseMove} style={style} ref={myRef}>
       <Line key={connectorLine.id} line={connectorLine} />
       {getLines().map(addNewLineElement)}
       <Controller commands={commands} />
@@ -23,10 +29,6 @@ export function IDE() {
       {getAccounts().map(addNewAccountElement)}
     </div>
   );
-}
-
-function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-  drawCLine(e.clientX, e.clientY);
 }
 
 function addNewLineElement(line: typeLine) {
