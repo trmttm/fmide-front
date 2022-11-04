@@ -15,7 +15,7 @@ export function IDE() {
   const commands = { addNewAccount: handleShow };
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
-  const myRef: any = React.useRef(null);
+  const myRef: React.MutableRefObject<any> = React.useRef(null);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {
