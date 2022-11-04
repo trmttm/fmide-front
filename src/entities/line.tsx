@@ -134,7 +134,6 @@ export function drawCLine(x2: number, y2: number) {
   connectorLine.setY(y);
   connectorLine.setWidth(width);
   connectorLine.setAngle(angle);
-  console.log(JSON.stringify(connectorLine));
 }
 
 export type typeLineObservers = {
