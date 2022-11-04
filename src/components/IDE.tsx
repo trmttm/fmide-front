@@ -6,7 +6,7 @@ import * as line from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
-import * as states from "../entities/states";
+import * as states from "../entities/mode";
 
 export function IDE() {
   const [showModal, setShowModal] = useState(false);

@@ -1,6 +1,8 @@
 import React from "react";
 import { typeAccount } from "../entities/accounts";
-import * as state from "../entities/states";
+import * as mode from "../entities/mode";
+import * as connections from "../entities/connections";
+import { connectAccounts } from "../entities/connections";
 
 export function Connectable(props: {
   children: React.ReactNode;
@@ -13,14 +15,14 @@ export function Connectable(props: {
   };
 
   function setConnectionFrom(_: React.MouseEvent<HTMLDivElement>) {
-    state.turnOnConnectingMode();
-    state.setConnectionFromAccount(account);
+    mode.turnOnConnectingMode();
+    connections.setConnectionFromAccount(account);
   }
 
   function setConnectionTo(_: React.MouseEvent<HTMLDivElement>) {
-    const connectionFromAccount = state.getConnectionFromAccount();
+    const connectionFromAccount = connections.getConnectionFromAccount();
     if (connectionFromAccount !== null) {
-      state.connectAccounts(connectionFromAccount, account);
+      connectAccounts(connectionFromAccount, account);
     }
   }
 
@@ -43,6 +45,6 @@ function wrapperOnlyIfMetaKey(
   if (event.metaKey) {
     f(event);
   } else {
-    state.turnOffConnectingMode();
+    mode.turnOffConnectingMode();
   }
 }

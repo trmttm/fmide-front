@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as state from "../entities/states";
+import * as state from "../entities/mode";
 
 export type typeDraggableProps = {
   children: React.ReactNode;
