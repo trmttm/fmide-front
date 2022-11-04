@@ -19,8 +19,7 @@ export function IDE() {
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {
-      line.setConnectorX1(e.clientX);
-      line.setConnectorY1(e.clientY - myRef.current.offsetTop);
+      line.startDrawingCline(e.clientX, e.clientY - myRef.current.offsetTop);
     }
   }
 

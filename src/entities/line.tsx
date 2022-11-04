@@ -14,13 +14,19 @@ export type typeLine = {
   observers?: null | typeLineObservers;
 };
 
-let [connectorX1, connectorY1] = [0, 0];
+let [connectorX1, connectorY1, isDrawingCline] = [0, 0, false];
 
-export function setConnectorX1(x: number) {
+export function startDrawingCline(x: number, y: number) {
+  setConnectorX1(x);
+  setConnectorY1(y);
+  isDrawingCline = true;
+}
+
+function setConnectorX1(x: number) {
   connectorX1 = x;
 }
 
-export function setConnectorY1(y: number) {
+function setConnectorY1(y: number) {
   connectorY1 = y;
 }
 
