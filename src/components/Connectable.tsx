@@ -3,6 +3,7 @@ import * as mode from "../entities/mode";
 import * as connections from "../entities/connections";
 import { connectAccounts } from "../entities/connections";
 import { typeAccount } from "../interfaces/types";
+import { updateConnectionLines } from "../entities/line";
 
 export function Connectable(props: {
   children: React.ReactNode;

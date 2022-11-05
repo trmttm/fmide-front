@@ -3,20 +3,21 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
 import { getLineById } from "../entities/line";
+import { clearStates, getAccounts } from "../entities/accounts";
 
-function getAddNewButton() {
+function getAddNewAccountButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });
 }
 
 test("Button addNewAccount is shown", () => {
   render(<IDE />);
-  const button = getAddNewButton();
+  const button = getAddNewAccountButton();
   expect(button).toHaveTextContent(setting.btnTextAddNewAccount);
 });
 
 test("Button addNewAccount ask user for account name", () => {
   render(<IDE />);
-  const button = getAddNewButton();
+  const button = getAddNewAccountButton();
   fireEvent.click(button);
   const inputElement = screen.getByText(setting.titleAddNewAccount);
   expect(inputElement).toBeInTheDocument();
@@ -36,7 +37,7 @@ function testIfNewAccountButtonIsAdded(newAccountName: string) {
 }
 
 function clickAddNewButton() {
-  const button = getAddNewButton();
+  const button = getAddNewAccountButton();
   fireEvent.click(button);
 }
 
@@ -57,6 +58,26 @@ test("lines are drawn per Lines model", () => {
   render(<IDE />);
   testIfSpecifiedLineExists(setting.connectorLineId);
   testLinePropertiesMatch(setting.connectorLineId);
+});
+
+test("Connect two accounts draws a line", () => {
+  clearStates();
+
+  render(<IDE />);
+  const button = getAddNewAccountButton();
+  fireEvent.click(button);
+  inputNewAccountNameAndClickOk("Account From");
+  fireEvent.click(button);
+  inputNewAccountNameAndClickOk("Account To");
+  const accounts = getAccounts();
+  const [accountFrom, accountTo] = accounts;
+
+  const actual = accountFrom.name;
+  expect(actual).toBe("Account From");
+  const actual1 = accountTo.name;
+  expect(actual1).toBe("Account To");
+  // const connectable = screen.getByTestId("connectable-" + account.id);
+  // fireEvent.mouseDown(connectable, { metaKey: true });
 });
 
 function testIfSpecifiedLineExists(lineId: string | number) {

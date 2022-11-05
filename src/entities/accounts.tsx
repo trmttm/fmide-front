@@ -1,9 +1,13 @@
 import { typeAccount, typeAccountObservers } from "../interfaces/types";
 
-const accounts: typeAccount[] = [];
+let accounts: typeAccount[] = [];
 
 export function getAccounts(): typeAccount[] {
   return accounts;
+}
+
+export function clearStates() {
+  accounts = [];
 }
 
 export function createAccount(

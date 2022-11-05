@@ -162,32 +162,32 @@ export function attachObservers(line: typeLine, observers: typeLineObservers) {
   line.observers = observers;
 }
 
-// export function updateConnectionLines(
-//   accountFrom: typeAccount,
-//   accountTo: typeAccount
-// ) {
-//   const line = getOrCreateConnectorLine(accountFrom.id, accountTo.id);
-// }
+export function updateConnectionLines(
+  accountFrom: typeAccount,
+  accountTo: typeAccount
+) {
+  const line = getOrCreateConnectorLine(accountFrom.id, accountTo.id);
+}
 
-// const connectorsDictionary: { [key: string]: typeLine } = {};
-//
-// function getConnectorDictionaryKey(
-//   fromId: number | string,
-//   toId: number | string
-// ): string {
-//   return "connectorFromAccount[" + fromId + "]ToAccount[" + toId + "]";
-// }
+const connectorsDictionary: { [key: string]: typeLine } = {};
 
-// function getOrCreateConnectorLine(
-//   fromId: number | string,
-//   toId: number | string
-// ): typeLine {
-//   const key = getConnectorDictionaryKey(fromId, toId);
-//   let line: typeLine;
-//   if (key in connectorsDictionary) {
-//     line = connectorsDictionary[key];
-//   } else {
-//     line = createLine(x, y, width, angle);
-//   }
-//   return line;
-// }
+function getConnectorDictionaryKey(
+  fromId: number | string,
+  toId: number | string
+): string {
+  return "connectorFromAccount[" + fromId + "]ToAccount[" + toId + "]";
+}
+
+function getOrCreateConnectorLine(
+  fromId: number | string,
+  toId: number | string
+): typeLine {
+  const key = getConnectorDictionaryKey(fromId, toId);
+  let line: typeLine;
+  if (key in connectorsDictionary) {
+    line = connectorsDictionary[key];
+  } else {
+    line = createLine(x, y, width, angle);
+  }
+  return line;
+}
