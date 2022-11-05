@@ -1,11 +1,22 @@
-import { typeAccount } from "../entities/accounts";
 import { Draggable } from "./Draggable";
 import Button from "react-bootstrap/Button";
-import React from "react";
+import React, { useState } from "react";
+import { typeAccount } from "../interfaces/types";
 
 export function Account(props: { account: typeAccount }) {
   const account: typeAccount = props.account;
   const id = "draggable-account-" + account.id;
+
+  const [width, setWidth] = useState(account.width);
+  const [height, setHeight] = useState(account.height);
+  const [displayName, setDisplayName] = useState(account.name);
+
+  account.attachObservers({
+    setName: setDisplayName,
+    setWidth: setWidth,
+    setHeight: setHeight,
+  });
+
   return (
     <Draggable
       key={id}
@@ -15,8 +26,12 @@ export function Account(props: { account: typeAccount }) {
       setX={account.setX}
       setY={account.setY}
     >
-      <Button variant="secondary" key={account.id}>
-        {account.name}
+      <Button
+        variant="secondary"
+        key={account.id}
+        style={{ width: width + "px", height: height + "px" }}
+      >
+        {displayName}
       </Button>
     </Draggable>
   );
