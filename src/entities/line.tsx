@@ -36,74 +36,63 @@ const connectorLine: typeLine = {
   y: 0,
   width: 0,
   angle: 0,
-  setX: (x: number) => setXToLine(connectorLineId, x),
-  setY: (y: number) => setYToLine(connectorLineId, y),
-  setWidth: (width: number) => setWidthToLine(connectorLineId, width),
-  setAngle: (angle: number) => setAngleToLine(connectorLineId, angle),
+  setX: (x: number) => setXToLine(connectorLine, x),
+  setY: (y: number) => setYToLine(connectorLine, y),
+  setWidth: (width: number) => setWidthToLine(connectorLine, width),
+  setAngle: (angle: number) => setAngleToLine(connectorLine, angle),
 };
 const Lines: typeLine[] = [];
 
-export function createLine(
+function createLine(
   x?: number,
   y?: number,
   width?: number,
   angle?: number
-) {
+): typeLine {
   const newLine = {
     id: Lines.length,
     x: x !== undefined ? x : 0,
     y: y !== undefined ? y : 0,
     width: width !== undefined ? width : 0,
     angle: angle !== undefined ? angle : 0,
-    setX: (x: number) => setXToLine(Lines.length, x),
-    setY: (y: number) => setYToLine(Lines.length, y),
-    setWidth: (width: number) => setWidthToLine(Lines.length, width),
-    setAngle: (angle: number) => setAngleToLine(Lines.length, angle),
+    setX: (x: number) => setXToLine(newLine, x),
+    setY: (y: number) => setYToLine(newLine, y),
+    setWidth: (width: number) => setWidthToLine(newLine, width),
+    setAngle: (angle: number) => setAngleToLine(newLine, angle),
   };
   Lines.push(newLine);
+  return newLine;
 }
 
 export function getLines(): typeLine[] {
   return Lines;
 }
 
-function setXToLine(id: number | string, x: number) {
-  const line = getLineById(id);
-  if (line !== undefined) {
-    line.x = x;
-    if (line.observers !== null && line.observers !== undefined) {
-      line.observers.setX(x);
-    }
+function setXToLine(line: typeLine, x: number) {
+  line.x = x;
+  if (line.observers !== null && line.observers !== undefined) {
+    line.observers.setX(x);
   }
 }
 
-function setYToLine(id: number | string, y: number) {
-  const line = getLineById(id);
-  if (line !== undefined) {
-    line.y = y;
-    if (line.observers !== null && line.observers !== undefined) {
-      line.observers.setY(y);
-    }
+function setYToLine(line: typeLine, y: number) {
+  line.y = y;
+  if (line.observers !== null && line.observers !== undefined) {
+    line.observers.setY(y);
   }
 }
 
-function setWidthToLine(id: number | string, width: number) {
-  const line = getLineById(id);
-  if (line !== undefined) {
-    line.width = width;
-    if (line.observers !== null && line.observers !== undefined) {
-      line.observers.setWidth(width);
-    }
+function setWidthToLine(line: typeLine, width: number) {
+  line.width = width;
+  if (line.observers !== null && line.observers !== undefined) {
+    line.observers.setWidth(width);
   }
 }
 
-function setAngleToLine(id: number | string, angle: number) {
-  const line = getLineById(id);
-  if (line !== undefined) {
-    line.angle = angle;
-    if (line.observers !== null && line.observers !== undefined) {
-      line.observers.setAngle(angle);
-    }
+function setAngleToLine(line: typeLine, angle: number) {
+  line.angle = angle;
+  if (line.observers !== null && line.observers !== undefined) {
+    line.observers.setAngle(angle);
   }
 }
 
@@ -132,16 +121,26 @@ export function drawCLine(x2: number, y2: number) {
     const y1: number = connectorY1;
     const connectorLine = getCLine();
 
-    const width = util.getDistanceBetweenPoints(x1, y1, x2, y2);
-    const angle = util.getAngleOfTwoPoints(x1, y1, x2, y2);
-    const x = Math.round((x2 + x1 - width) / 2);
-    const y = Math.round((y2 + y1) / 2);
-
-    connectorLine.setX(x);
-    connectorLine.setY(y);
-    connectorLine.setWidth(width);
-    connectorLine.setAngle(angle);
+    drawLine(x1, y1, x2, y2, connectorLine);
   }
+}
+
+function drawLine(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  line: typeLine
+) {
+  const width = util.getDistanceBetweenPoints(x1, y1, x2, y2);
+  const angle = util.getAngleOfTwoPoints(x1, y1, x2, y2);
+  const x = Math.round((x2 + x1 - width) / 2);
+  const y = Math.round((y2 + y1) / 2);
+
+  line.setX(x);
+  line.setY(y);
+  line.setWidth(width);
+  line.setAngle(angle);
 }
 
 export function removeCLine() {
@@ -162,3 +161,33 @@ export type typeLineObservers = {
 export function attachObservers(line: typeLine, observers: typeLineObservers) {
   line.observers = observers;
 }
+
+// export function updateConnectionLines(
+//   accountFrom: typeAccount,
+//   accountTo: typeAccount
+// ) {
+//   const line = getOrCreateConnectorLine(accountFrom.id, accountTo.id);
+// }
+
+// const connectorsDictionary: { [key: string]: typeLine } = {};
+//
+// function getConnectorDictionaryKey(
+//   fromId: number | string,
+//   toId: number | string
+// ): string {
+//   return "connectorFromAccount[" + fromId + "]ToAccount[" + toId + "]";
+// }
+
+// function getOrCreateConnectorLine(
+//   fromId: number | string,
+//   toId: number | string
+// ): typeLine {
+//   const key = getConnectorDictionaryKey(fromId, toId);
+//   let line: typeLine;
+//   if (key in connectorsDictionary) {
+//     line = connectorsDictionary[key];
+//   } else {
+//     line = createLine(x, y, width, angle);
+//   }
+//   return line;
+// }
