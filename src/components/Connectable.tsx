@@ -1,8 +1,8 @@
 import React from "react";
-import { typeAccount } from "../entities/accounts";
 import * as mode from "../entities/mode";
 import * as connections from "../entities/connections";
 import { connectAccounts } from "../entities/connections";
+import { typeAccount } from "../interfaces/types";
 
 export function Connectable(props: {
   children: React.ReactNode;
@@ -23,6 +23,7 @@ export function Connectable(props: {
     const connectionFromAccount = connections.getConnectionFromAccount();
     if (connectionFromAccount !== null) {
       connectAccounts(connectionFromAccount, account);
+      // updateConnectionLines(connectionFromAccount, account);
     }
   }
 
