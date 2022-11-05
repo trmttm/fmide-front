@@ -1,9 +1,10 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Connectable } from "./Connectable";
-import { createAccount, typeAccount } from "../entities/accounts";
+import { createAccount } from "../entities/accounts";
 import * as mode from "../entities/mode";
 import * as connections from "../entities/connections";
+import { typeAccount } from "../interfaces/types";
 
 function renderConnectable(account: typeAccount) {
   render(<Connectable account={account}>Connectable</Connectable>);
