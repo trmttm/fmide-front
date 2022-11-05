@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
-import { getAccounts, typeAccount } from "../entities/accounts";
+import { getAccounts } from "../entities/accounts";
 import { Line } from "./Line";
 import * as line from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
 import * as states from "../entities/mode";
+import { typeAccount } from "../interfaces/types";
 
 export function IDE() {
   const [showModal, setShowModal] = useState(false);
