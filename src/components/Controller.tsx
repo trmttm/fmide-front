@@ -7,8 +7,9 @@ type typeControllerCommands = { commands: { addNewAccount: () => void } };
 
 export function Controller(props: typeControllerCommands) {
   const addNewAccount: () => void = props.commands.addNewAccount;
+  const id = "draggable-" + setting.btnTextAddNewAccount;
   return (
-    <Draggable key={"draggable-" + setting.btnTextAddNewAccount}>
+    <Draggable key={id} id={id}>
       <Button variant="secondary" onClick={addNewAccount}>
         {setting.btnTextAddNewAccount}
       </Button>

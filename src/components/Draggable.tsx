@@ -7,6 +7,7 @@ export type typeDraggableProps = {
   y?: number;
   setX?: (x: number) => void;
   setY?: (y: number) => void;
+  id: string;
 };
 
 export function Draggable(props: typeDraggableProps) {
@@ -41,7 +42,7 @@ export function Draggable(props: typeDraggableProps) {
     event.preventDefault();
   }
 
-  function setXY(event: React.DragEvent<HTMLDivElement>) {
+  function setXY(_: React.DragEvent<HTMLDivElement>) {
     if (props.setX !== undefined) {
       props.setX(x);
     }
@@ -64,6 +65,7 @@ export function Draggable(props: typeDraggableProps) {
         marginLeft: Math.floor(x) + "px",
         position: "absolute",
       }}
+      data-testid={props.id}
     >
       {props.children}
     </div>

@@ -5,9 +5,11 @@ import React from "react";
 
 export function Account(props: { account: typeAccount }) {
   const account: typeAccount = props.account;
+  const id = "draggable-account-" + account.id;
   return (
     <Draggable
-      key={"draggable-account-" + account.id}
+      key={id}
+      id={id}
       x={account.x}
       y={account.y}
       setX={account.setX}
