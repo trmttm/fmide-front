@@ -1,5 +1,6 @@
 import { connectorLineId } from "../setting";
 import * as util from "../utilities/utilities";
+import { typeAccount } from "../interfaces/types";
 
 export type typeLine = {
   id: string | number;
@@ -42,6 +43,9 @@ const connectorLine: typeLine = {
   setAngle: (angle: number) => setAngleToLine(connectorLine, angle),
 };
 const Lines: typeLine[] = [];
+const connectorsDictionary: { [key: string]: typeLine } = {
+  connectorLineId: connectorLine,
+};
 
 function createLine(
   x?: number,
@@ -97,18 +101,7 @@ function setAngleToLine(line: typeLine, angle: number) {
 }
 
 export function getLineById(id: string | number): typeLine | undefined {
-  let lineToReturn = undefined;
-  if (id === connectorLineId) {
-    lineToReturn = getCLine();
-  } else {
-    for (const line of Lines) {
-      if (line.id === id) {
-        lineToReturn = line;
-        break;
-      }
-    }
-  }
-  return lineToReturn;
+  return connectorsDictionary[id];
 }
 
 export function getCLine(): typeLine {
@@ -167,15 +160,17 @@ export function updateConnectionLines(
   accountTo: typeAccount
 ) {
   const line = getOrCreateConnectorLine(accountFrom.id, accountTo.id);
-}
-
-const connectorsDictionary: { [key: string]: typeLine } = {};
-
-function getConnectorDictionaryKey(
-  fromId: number | string,
-  toId: number | string
-): string {
-  return "connectorFromAccount[" + fromId + "]ToAccount[" + toId + "]";
+  const [x1, y1, x2, y2] = util.getNearestPointsOfTwoElements(
+    accountFrom.x,
+    accountFrom.y,
+    accountFrom.width,
+    accountFrom.height,
+    accountTo.x,
+    accountTo.y,
+    accountTo.width,
+    accountTo.height
+  );
+  drawLine(x1, y1, x2, y2, line);
 }
 
 function getOrCreateConnectorLine(
@@ -187,7 +182,15 @@ function getOrCreateConnectorLine(
   if (key in connectorsDictionary) {
     line = connectorsDictionary[key];
   } else {
-    line = createLine(x, y, width, angle);
+    line = createLine(0, 0, 0, 0);
+    connectorsDictionary[getConnectorDictionaryKey(fromId, toId)] = line;
   }
   return line;
+}
+
+export function getConnectorDictionaryKey(
+  fromId: number | string,
+  toId: number | string
+): string {
+  return "connectorFromAccount[" + fromId + "]ToAccount[" + toId + "]";
 }

@@ -4,6 +4,10 @@ let connectionFromAccount: null | typeAccount = null;
 type typeConnections = [number, number][];
 let connections: typeConnections = [];
 
+export function clearStates() {
+  connections = [];
+}
+
 export function setConnectionFromAccount(account: typeAccount) {
   connectionFromAccount = account;
   console.log("Connecting from " + account.name + "[" + account.id + "]");

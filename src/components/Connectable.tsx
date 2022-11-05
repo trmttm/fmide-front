@@ -24,7 +24,7 @@ export function Connectable(props: {
     const connectionFromAccount = connections.getConnectionFromAccount();
     if (connectionFromAccount !== null) {
       connectAccounts(connectionFromAccount, account);
-      // updateConnectionLines(connectionFromAccount, account);
+      updateConnectionLines(connectionFromAccount, account);
     }
   }
 

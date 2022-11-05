@@ -13,7 +13,7 @@ function renderConnectable(account: typeAccount) {
   return connectable;
 }
 
-test("Connectable metaClick turns on Connecting Mode", () => {
+test("Connectable connects accounts", () => {
   const accountFrom = createAccount("Account From", 10, 20);
   const accountTo = createAccount("Account To", 50, 80);
 

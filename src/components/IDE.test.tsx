@@ -2,8 +2,9 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
-import { getLineById } from "../entities/line";
-import { clearStates, getAccounts } from "../entities/accounts";
+import * as entityAccounts from "../entities/accounts";
+import * as entityConnections from "../entities/connections";
+import * as entityLines from "../entities/line";
 
 function getAddNewAccountButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });
@@ -61,7 +62,8 @@ test("lines are drawn per Lines model", () => {
 });
 
 test("Connect two accounts draws a line", () => {
-  clearStates();
+  entityAccounts.clearStates();
+  entityConnections.clearStates();
 
   render(<IDE />);
   const button = getAddNewAccountButton();
@@ -69,15 +71,32 @@ test("Connect two accounts draws a line", () => {
   inputNewAccountNameAndClickOk("Account From");
   fireEvent.click(button);
   inputNewAccountNameAndClickOk("Account To");
-  const accounts = getAccounts();
+  const accounts = entityAccounts.getAccounts();
   const [accountFrom, accountTo] = accounts;
 
-  const actual = accountFrom.name;
-  expect(actual).toBe("Account From");
-  const actual1 = accountTo.name;
-  expect(actual1).toBe("Account To");
-  // const connectable = screen.getByTestId("connectable-" + account.id);
-  // fireEvent.mouseDown(connectable, { metaKey: true });
+  expect(accountFrom.name).toBe("Account From");
+  expect(accountTo.name).toBe("Account To");
+  const connectableFrom = screen.getByTestId("connectable-" + accountFrom.id);
+  const connectableTo = screen.getByTestId("connectable-" + accountTo.id);
+  fireEvent.mouseDown(connectableFrom, { metaKey: true });
+  fireEvent.mouseUp(connectableTo, { metaKey: true });
+  const lineKey = entityLines.getConnectorDictionaryKey(
+    accountFrom.id,
+    accountTo.id
+  );
+  const line = entityLines.getLineById(lineKey);
+  expect(line === undefined).toBe(false);
+  let [testX, testY, testWidth, testAngle] = [0, 0, 0, 0];
+  if (line !== undefined) {
+    testX = line.x;
+    testY = line.y;
+    testWidth = line.width;
+    testAngle = line.angle;
+  }
+  expect(testX).toBe(0);
+  expect(testY).toBe(19);
+  expect(testWidth).toBe(0);
+  expect(testAngle).toBe(0);
 });
 
 function testIfSpecifiedLineExists(lineId: string | number) {
@@ -86,7 +105,7 @@ function testIfSpecifiedLineExists(lineId: string | number) {
 }
 
 function testLinePropertiesMatch(lineId: number | string) {
-  const lineState = getLineById(lineId);
+  const lineState = entityLines.getLineById(lineId);
   const lineElement = screen.getByTestId(lineId);
   const expectedX = lineState !== undefined ? lineState.x + "px" : "0px";
   const expectedY = lineState !== undefined ? lineState.y + "px" : "0px";
@@ -99,3 +118,7 @@ function testLinePropertiesMatch(lineId: number | string) {
   expect(lineElement.style.rotate).toBe(expectedAngle);
   expect(lineElement.style.width).toBe(expectedLength);
 }
+
+test("Entities must be encapsulated so that many instances can be created", () => {
+  expect(true).toBe(false);
+});
