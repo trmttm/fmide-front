@@ -1,4 +1,4 @@
-import { typeAccount } from "./accounts";
+import { typeAccount } from "../interfaces/types";
 
 let connectionFromAccount: null | typeAccount = null;
 type typeConnections = [number, number][];
