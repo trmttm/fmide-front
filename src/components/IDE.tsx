@@ -10,6 +10,7 @@ import * as states from "../entities/mode";
 import { typeAccount, typeLine } from "../interfaces/types";
 
 export function IDE() {
+  const [nNotifications, setNNotifications] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -17,6 +18,12 @@ export function IDE() {
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
   const myRef: React.MutableRefObject<any> = React.useRef(null);
+
+  function notify() {
+    setNNotifications(nNotifications + 1);
+  }
+
+  line.attachObserversToNotification(notify);
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {

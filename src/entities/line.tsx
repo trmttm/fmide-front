@@ -3,6 +3,14 @@ import * as util from "../utilities/utilities";
 import { typeAccount, typeLine } from "../interfaces/types";
 
 let [connectorX1, connectorY1, isDrawingCline] = [0, 0, false];
+let observersToNotification: (() => void)[] = [];
+let Lines: typeLine[] = [];
+
+export function clearState() {
+  [connectorX1, connectorY1, isDrawingCline] = [0, 0, false];
+  observersToNotification = [];
+  Lines = [];
+}
 
 export function startDrawingCline(x: number, y: number) {
   setConnectorX1(x);
@@ -29,7 +37,6 @@ const connectorLine: typeLine = {
   setWidth: (width: number) => setWidthToLine(connectorLine, width),
   setAngle: (angle: number) => setAngleToLine(connectorLine, angle),
 };
-const Lines: typeLine[] = [];
 const connectorsDictionary: { [key: string]: typeLine } = {
   connectorLineId: connectorLine,
 };
@@ -52,6 +59,7 @@ function createLine(
     setAngle: (angle: number) => setAngleToLine(newLine, angle),
   };
   Lines.push(newLine);
+  notify();
   return newLine;
 }
 
@@ -142,6 +150,14 @@ export function attachObservers(line: typeLine, observers: typeLineObservers) {
   line.observers = observers;
 }
 
+export function attachObserversToNotification(observer: () => void) {
+  observersToNotification.push(observer);
+}
+
+function notify() {
+  observersToNotification.forEach((observer) => observer());
+}
+
 export function updateConnectionLines(
   accountFrom: typeAccount,
   accountTo: typeAccount
@@ -171,6 +187,7 @@ function getOrCreateConnectorLine(
   } else {
     line = createLine(0, 0, 0, 0);
     connectorsDictionary[getConnectorDictionaryKey(fromId, toId)] = line;
+    connectorsDictionary[getConnectorDictionaryKey(toId, fromId)] = line;
   }
   return line;
 }
