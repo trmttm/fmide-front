@@ -1,6 +1,7 @@
 import { typeAccount, typeAccountObservers } from "../interfaces/types";
 
 let accounts: typeAccount[] = [];
+let accountIdToAccount: { [key: number]: typeAccount } = {};
 
 export function getAccounts(): typeAccount[] {
   return accounts;
@@ -8,6 +9,11 @@ export function getAccounts(): typeAccount[] {
 
 export function clearStates() {
   accounts = [];
+  accountIdToAccount = {};
+}
+
+export function getAccountById(id: number): typeAccount | undefined {
+  return accountIdToAccount[id];
 }
 
 export function createAccount(
@@ -30,11 +36,12 @@ export function createAccount(
     setY: (y: number) => setYToAccount(newAccount, y),
     setWidth: (width: number) => setWidthToAccount(newAccount, width),
     setHeight: (height: number) => setHeightToAccount(newAccount, height),
-    observers: null,
+    observers: [],
     attachObservers: (observers: typeAccountObservers) =>
       attachObserver(newAccount, observers),
   };
   accounts.push(newAccount);
+  accountIdToAccount[nextId] = newAccount;
   return newAccount;
 }
 
@@ -44,26 +51,24 @@ function setNameToAccount(account: typeAccount, name: string) {
 
 function setXToAccount(account: typeAccount, x: number) {
   account.x = x;
+  account.observers.forEach((observer) => observer.setX(x));
 }
 
 function setYToAccount(account: typeAccount, y: number) {
   account.y = y;
+  account.observers.forEach((observer) => observer.setY(y));
 }
 
 function setWidthToAccount(account: typeAccount, width: number) {
   account.width = width;
-  if (account.observers !== null) {
-    account.observers.setWidth(width);
-  }
+  account.observers.forEach((observer) => observer.setWidth(width));
 }
 
 function setHeightToAccount(account: typeAccount, height: number) {
   account.height = height;
-  if (account.observers !== null) {
-    account.observers.setHeight(height);
-  }
+  account.observers.forEach((observer) => observer.setHeight(height));
 }
 
 function attachObserver(account: typeAccount, observers: typeAccountObservers) {
-  account.observers = observers;
+  account.observers.push(observers);
 }

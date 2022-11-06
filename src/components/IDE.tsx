@@ -7,7 +7,7 @@ import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
 import * as states from "../entities/mode";
-import { typeAccount } from "../interfaces/types";
+import { typeAccount, typeLine } from "../interfaces/types";
 
 export function IDE() {
   const [showModal, setShowModal] = useState(false);
@@ -67,7 +67,7 @@ export function IDE() {
   );
 }
 
-function addNewLineElement(line: line.typeLine) {
+function addNewLineElement(line: typeLine) {
   return <Line key={line.id} line={line} />;
 }
 

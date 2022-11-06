@@ -2,6 +2,7 @@ import { Draggable } from "./Draggable";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import { typeAccount } from "../interfaces/types";
+import { updateConnectorLines } from "../interactor/updateConnectorLines";
 
 export function Account(props: { account: typeAccount }) {
   const account: typeAccount = props.account;
@@ -15,6 +16,8 @@ export function Account(props: { account: typeAccount }) {
     setName: setDisplayName,
     setWidth: setWidth,
     setHeight: setHeight,
+    setX: (_: number) => updateConnectorLines(account),
+    setY: (_: number) => updateConnectorLines(account),
   });
 
   return (

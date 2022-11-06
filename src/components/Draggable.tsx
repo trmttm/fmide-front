@@ -30,25 +30,22 @@ export function Draggable(props: typeDraggableProps) {
       const newX = x + deltaX;
       setXFrom(mouseX);
       setX(newX);
+      if (props.setX !== undefined) {
+        props.setX(x);
+      }
     }
     if (deltaY !== 0 && mouseY !== 0) {
       const newY = y + deltaY;
       setYFrom(mouseY);
       setY(newY);
+      if (props.setY !== undefined) {
+        props.setY(y);
+      }
     }
   }
 
   function preventSnapBackAnimation(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
-  }
-
-  function setXY(_: React.DragEvent<HTMLDivElement>) {
-    if (props.setX !== undefined) {
-      props.setX(x);
-    }
-    if (props.setY !== undefined) {
-      props.setY(y);
-    }
   }
 
   return (
@@ -59,7 +56,6 @@ export function Draggable(props: typeDraggableProps) {
       onDragOver={(event) =>
         wrapperDraggingMode(preventSnapBackAnimation, event)
       }
-      onDragEnd={(event) => wrapperDraggingMode(setXY, event)}
       style={{
         marginTop: Math.floor(y) + "px",
         marginLeft: Math.floor(x) + "px",

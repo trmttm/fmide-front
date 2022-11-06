@@ -1,19 +1,6 @@
 import { connectorLineId } from "../setting";
 import * as util from "../utilities/utilities";
-import { typeAccount } from "../interfaces/types";
-
-export type typeLine = {
-  id: string | number;
-  x: number;
-  y: number;
-  width: number;
-  angle: number;
-  setX: (x: number) => void;
-  setY: (y: number) => void;
-  setWidth: (width: number) => void;
-  setAngle: (angle: number) => void;
-  observers?: null | typeLineObservers;
-};
+import { typeAccount, typeLine } from "../interfaces/types";
 
 let [connectorX1, connectorY1, isDrawingCline] = [0, 0, false];
 

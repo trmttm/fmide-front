@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { attachObservers, typeLine, typeLineObservers } from "../entities/line";
+import { attachObservers, typeLineObservers } from "../entities/line";
+import { typeLine } from "../interfaces/types";
 
 export function Line(props: { line: typeLine }) {
   const line: typeLine = props.line;
