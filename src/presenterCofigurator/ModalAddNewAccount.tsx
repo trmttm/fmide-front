@@ -1,6 +1,6 @@
 import * as presenter from "../presenter/Presenter";
 
-export function configurePresenterAttachModalShowHide(
+export function ModalAddNewAccount(
   showModal: boolean,
   setShowModal: (value: ((prevState: boolean) => boolean) | boolean) => void
 ) {
