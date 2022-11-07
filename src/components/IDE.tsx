@@ -8,11 +8,11 @@ import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
 import * as states from "../entities/mode";
 import { typeAccount, typeLine } from "../interfaces/types";
-import * as presenter from "../presenter/Presenter";
+import { configurePresenterAttachModalShowHide } from "../presenterCofigurator/ModalAddNewAccount";
 
 export function IDE() {
   const [nNotifications, setNNotifications] = useState(0);
-  presenter.configurePresenterAttachModalShowHide(...useState(false));
+  configurePresenterAttachModalShowHide(...useState(false));
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
   const myRef: React.MutableRefObject<any> = React.useRef(null);
