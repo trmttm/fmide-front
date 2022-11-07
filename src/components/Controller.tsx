@@ -2,11 +2,10 @@ import { Draggable } from "./Draggable";
 import * as setting from "../setting";
 import Button from "react-bootstrap/Button";
 import React from "react";
+import * as presenter from "../presenter/Presenter";
 
-type typeControllerCommands = { commands: { addNewAccount: () => void } };
-
-export function Controller(props: typeControllerCommands) {
-  const addNewAccount = props.commands.addNewAccount;
+export function Controller() {
+  const addNewAccount = presenter.openAddNewAccountInputName;
   const id = "draggable-" + setting.btnTextAddNewAccount;
   return (
     <Draggable key={id} id={id}>

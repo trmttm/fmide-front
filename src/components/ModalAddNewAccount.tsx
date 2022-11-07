@@ -4,15 +4,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
 import { createAccount } from "../entities/accounts";
+import * as presenter from "../presenter/Presenter";
 
-type propsModalAddNewAccount = { show?: boolean; handleClose?: () => void };
-
-export function ModalAddNewAccount(props: propsModalAddNewAccount) {
-  const [lShow, setLShow] = useState(true);
-
-  const show = props.show === undefined ? lShow : props.show;
-  const handleClose =
-    props.handleClose === undefined ? () => setLShow : props.handleClose;
+export function ModalAddNewAccount() {
+  const show = presenter.getHookShowAddNewAccountInputName();
+  const handleClose = presenter.closeAddNewAccountInputName;
   const [userInput, setUserInput] = useState("");
 
   function updateUserInput(event: React.ChangeEvent<HTMLInputElement>) {

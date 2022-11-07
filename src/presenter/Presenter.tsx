@@ -1,27 +1,27 @@
-import { interfacePresenter } from "../interfaces/types";
+let commandsOpenAddNewAccountInputName: (() => void)[] = [];
+let commandsCloseAddNewAccountInputName: (() => void)[] = [];
+let hookShowAddNewAccountInputName: boolean = true;
 
-export class Presenter implements interfacePresenter {
-  open: (() => void)[];
-  close: (() => void)[];
+export function setHookShowAddNewAccountInputName(hook: boolean) {
+  hookShowAddNewAccountInputName = hook;
+}
 
-  constructor() {
-    this.open = [];
-    this.close = [];
-  }
+export function getHookShowAddNewAccountInputName(): boolean {
+  return hookShowAddNewAccountInputName;
+}
 
-  subscribeToCloseInputAccountName(method: () => void): void {
-    this.close.push(method);
-  }
+export function attachToOpenAddNewAccountInputName(command: () => void) {
+  commandsOpenAddNewAccountInputName.push(command);
+}
 
-  subscribeToOpenInputAccountName(method: () => void): void {
-    this.open.push(method);
-  }
+export function attachToCloseAddNewAccountInputName(command: () => void) {
+  commandsCloseAddNewAccountInputName.push(command);
+}
 
-  closeInputAccountName(): void {
-    this.close.forEach((method) => method());
-  }
+export function openAddNewAccountInputName(): void {
+  commandsOpenAddNewAccountInputName.forEach((command) => command());
+}
 
-  openInputAccountName(): void {
-    this.open.forEach((method) => method());
-  }
+export function closeAddNewAccountInputName(): void {
+  commandsCloseAddNewAccountInputName.forEach((command) => command());
 }

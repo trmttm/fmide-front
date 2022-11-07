@@ -8,13 +8,14 @@ import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
 import * as states from "../entities/mode";
 import { typeAccount, typeLine } from "../interfaces/types";
+import * as presenter from "../presenter/Presenter";
 
 export function IDE() {
   const [nNotifications, setNNotifications] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
-  const commands = { addNewAccount: handleShow };
+  presenter.setHookShowAddNewAccountInputName(showModal);
+  presenter.attachToOpenAddNewAccountInputName(() => setShowModal(true));
+  presenter.attachToCloseAddNewAccountInputName(() => setShowModal(false));
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
   const myRef: React.MutableRefObject<any> = React.useRef(null);
@@ -67,8 +68,8 @@ export function IDE() {
     >
       <Line key={connectorLine.id} line={connectorLine} />
       {line.getLines().map(addNewLineElement)}
-      <Controller commands={commands} />
-      <ModalAddNewAccount show={showModal} handleClose={handleClose} />
+      <Controller />
+      <ModalAddNewAccount />
       {getAccounts().map(addNewAccountElement)}
     </div>
   );
