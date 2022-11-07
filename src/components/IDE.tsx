@@ -12,10 +12,7 @@ import * as presenter from "../presenter/Presenter";
 
 export function IDE() {
   const [nNotifications, setNNotifications] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  presenter.setHookShowAddNewAccountInputName(showModal);
-  presenter.attachToOpenAddNewAccountInputName(() => setShowModal(true));
-  presenter.attachToCloseAddNewAccountInputName(() => setShowModal(false));
+  presenter.configurePresenterAttachModalShowHide(...useState(false));
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
   const myRef: React.MutableRefObject<any> = React.useRef(null);

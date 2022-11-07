@@ -1,8 +1,8 @@
-let commandsOpenAddNewAccountInputName: (() => void)[] = [];
-let commandsCloseAddNewAccountInputName: (() => void)[] = [];
-let hookShowAddNewAccountInputName: boolean = true;
+export let commandsOpenAddNewAccountInputName: (() => void)[] = [];
+export let commandsCloseAddNewAccountInputName: (() => void)[] = [];
+export let hookShowAddNewAccountInputName: boolean = true;
 
-export function setHookShowAddNewAccountInputName(hook: boolean) {
+function setHookShowAddNewAccountInputName(hook: boolean) {
   hookShowAddNewAccountInputName = hook;
 }
 
@@ -10,11 +10,11 @@ export function getHookShowAddNewAccountInputName(): boolean {
   return hookShowAddNewAccountInputName;
 }
 
-export function attachToOpenAddNewAccountInputName(command: () => void) {
+function attachToOpenAddNewAccountInputName(command: () => void) {
   commandsOpenAddNewAccountInputName.push(command);
 }
 
-export function attachToCloseAddNewAccountInputName(command: () => void) {
+function attachToCloseAddNewAccountInputName(command: () => void) {
   commandsCloseAddNewAccountInputName.push(command);
 }
 
@@ -24,4 +24,13 @@ export function openAddNewAccountInputName(): void {
 
 export function closeAddNewAccountInputName(): void {
   commandsCloseAddNewAccountInputName.forEach((command) => command());
+}
+
+export function configurePresenterAttachModalShowHide(
+  showModal: boolean,
+  setShowModal: (value: ((prevState: boolean) => boolean) | boolean) => void
+) {
+  setHookShowAddNewAccountInputName(showModal);
+  attachToOpenAddNewAccountInputName(() => setShowModal(true));
+  attachToCloseAddNewAccountInputName(() => setShowModal(false));
 }
