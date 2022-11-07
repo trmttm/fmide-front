@@ -6,7 +6,7 @@ import React from "react";
 type typeControllerCommands = { commands: { addNewAccount: () => void } };
 
 export function Controller(props: typeControllerCommands) {
-  const addNewAccount: () => void = props.commands.addNewAccount;
+  const addNewAccount = props.commands.addNewAccount;
   const id = "draggable-" + setting.btnTextAddNewAccount;
   return (
     <Draggable key={id} id={id}>
