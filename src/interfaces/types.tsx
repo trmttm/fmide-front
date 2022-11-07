@@ -35,3 +35,10 @@ export type typeLine = {
   setAngle: (angle: number) => void;
   observers?: null | typeLineObservers;
 };
+
+export interface interfacePresenter {
+  subscribeToOpenInputAccountName: (method: () => void) => void;
+  subscribeToCloseInputAccountName: (method: () => void) => void;
+  openInputAccountName: () => void;
+  closeInputAccountName: () => void;
+}
