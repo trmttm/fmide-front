@@ -18,7 +18,6 @@ export function IDE() {
 
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
-
   const myRef: React.MutableRefObject<any> = React.useRef(null);
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
