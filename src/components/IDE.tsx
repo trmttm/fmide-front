@@ -9,19 +9,17 @@ import { Connectable } from "./Connectable";
 import * as states from "../entities/mode";
 import { typeAccount, typeLine } from "../interfaces/types";
 import * as configurePresenter from "../presenterConfigurator";
+import * as presenter from "../presenter/Presenter";
 
 export function IDE() {
-  const [nNotifications, setNNotifications] = useState(0);
   configurePresenter.configureModalAddNewAccount(...useState(false));
+  configurePresenter.configureDrawLine(...useState(0));
+  line.attachObserversToNotification(presenter.drawLine);
+
   const connectorLine = line.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
+
   const myRef: React.MutableRefObject<any> = React.useRef(null);
-
-  function notify() {
-    setNNotifications(nNotifications + 1);
-  }
-
-  line.attachObserversToNotification(notify);
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {
