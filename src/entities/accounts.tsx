@@ -2,6 +2,12 @@ import { typeAccount, typeAccountObservers } from "../interfaces/types";
 
 let accounts: typeAccount[] = [];
 let accountIdToAccount: { [key: number]: typeAccount } = {};
+export let hooksShowAccountModification: { [key: number]: boolean } = {};
+type CommandsAccountConfiguration = {
+  [key: number]: (() => void)[];
+};
+export let commandsOpenAccountConfiguration: CommandsAccountConfiguration = {};
+export let commandsCloseAccountConfiguration: CommandsAccountConfiguration = {};
 
 export function getAccounts(): typeAccount[] {
   return accounts;
@@ -42,11 +48,22 @@ export function createAccount(
   };
   accounts.push(newAccount);
   accountIdToAccount[nextId] = newAccount;
+  hooksShowAccountModification[nextId] = false;
+  commandsOpenAccountConfiguration[nextId] = [];
+  commandsCloseAccountConfiguration[nextId] = [];
   return newAccount;
+}
+
+export function modifyAccountName(id: number, name: string) {
+  const account = getAccountById(id);
+  if (account !== undefined) {
+    setNameToAccount(account, name);
+  }
 }
 
 function setNameToAccount(account: typeAccount, name: string) {
   account.name = name;
+  account.observers.forEach((observer) => observer.setName(name));
 }
 
 function setXToAccount(account: typeAccount, x: number) {
@@ -71,4 +88,15 @@ function setHeightToAccount(account: typeAccount, height: number) {
 
 function attachObserver(account: typeAccount, observers: typeAccountObservers) {
   account.observers.push(observers);
+}
+
+export function getHookShowAccountModification(accountId: number): boolean {
+  return hooksShowAccountModification[accountId];
+}
+
+export function setHookShowAccountConfiguration(
+  accountId: number,
+  hook: boolean
+) {
+  hooksShowAccountModification[accountId] = hook;
 }

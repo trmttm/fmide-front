@@ -3,6 +3,9 @@ import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import { typeAccount } from "../interfaces/types";
 import { updateConnectorLines } from "../interactor/updateConnectorLines";
+import { ModalAccountConfiguration } from "./ModalAccountConfiguration";
+import * as configurePresenter from "../presenterConfigurator";
+import * as presenter from "../presenter/Presenter";
 
 export function Account(props: { account: typeAccount }) {
   const account: typeAccount = props.account;
@@ -20,6 +23,11 @@ export function Account(props: { account: typeAccount }) {
     setY: (_: number) => updateConnectorLines(account),
   });
 
+  configurePresenter.configureAccountConfiguration(
+    account.id,
+    ...useState(false)
+  );
+
   return (
     <Draggable
       key={id}
@@ -33,9 +41,17 @@ export function Account(props: { account: typeAccount }) {
         variant="secondary"
         key={account.id}
         style={{ width: width + "px", height: height + "px" }}
+        onClick={() => openModalAccountConfiguration(account.id)}
       >
         {displayName}
       </Button>
+      <ModalAccountConfiguration
+        accountId={account.id}
+      ></ModalAccountConfiguration>
     </Draggable>
   );
+}
+
+function openModalAccountConfiguration(accountId: number) {
+  presenter.openAccountConfiguration(accountId);
 }
