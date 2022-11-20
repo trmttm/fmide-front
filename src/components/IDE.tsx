@@ -6,12 +6,12 @@ import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
 import { typeAccount, typeLine } from "../interfaces/types";
-import * as configurePresenter from "../presenterConfigurator";
 import * as presenter from "../presenter/Presenter";
+import { presenterConfigurator } from "../presenterConfigurator";
 
 export function IDE() {
-  configurePresenter.configureModalAddNewAccount(...useState(false));
-  configurePresenter.configureDrawLine(...useState(0));
+  presenterConfigurator.configureModalAddNewAccount(...useState(false));
+  presenterConfigurator.configureDrawLine(...useState(0));
   entities.attachObserversToNotification(presenter.drawLine);
 
   const connectorLine = entities.getCLine();

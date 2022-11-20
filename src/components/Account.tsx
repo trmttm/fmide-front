@@ -2,9 +2,9 @@ import { Draggable } from "./Draggable";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import { typeAccount } from "../interfaces/types";
-import { updateConnectorLines } from "../interactor/updateConnectorLines";
+import { interactor } from "../interactor/interactor";
 import { ModalAccountConfiguration } from "./ModalAccountConfiguration";
-import * as configurePresenter from "../presenterConfigurator";
+import { presenterConfigurator } from "../presenterConfigurator";
 import * as presenter from "../presenter/Presenter";
 
 export function Account(props: { account: typeAccount }) {
@@ -19,11 +19,11 @@ export function Account(props: { account: typeAccount }) {
     setName: setDisplayName,
     setWidth: setWidth,
     setHeight: setHeight,
-    setX: (_: number) => updateConnectorLines(account),
-    setY: (_: number) => updateConnectorLines(account),
+    setX: (_: number) => interactor.updateConnectorLines(account),
+    setY: (_: number) => interactor.updateConnectorLines(account),
   });
 
-  configurePresenter.configureAccountConfiguration(
+  presenterConfigurator.configureAccountConfiguration(
     account.id,
     ...useState(false)
   );
