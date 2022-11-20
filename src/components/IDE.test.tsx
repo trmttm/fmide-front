@@ -5,7 +5,7 @@ import * as setting from "../setting";
 import * as entityAccounts from "../entities/accounts";
 import * as entityConnections from "../entities/connections";
 import * as entityLines from "../entities/line";
-
+import { entities } from "../entities/entities";
 function getAddNewAccountButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });
 }
@@ -62,7 +62,7 @@ test("lines are drawn per Lines model", () => {
 });
 
 test("Connect two accounts draws a line", () => {
-  entityAccounts.clearStates();
+  entities.clearStates();
   entityConnections.clearStates();
 
   render(<IDE />);
@@ -71,7 +71,7 @@ test("Connect two accounts draws a line", () => {
   inputNewAccountNameAndClickOk("Account From");
   fireEvent.click(button);
   inputNewAccountNameAndClickOk("Account To");
-  const accounts = entityAccounts.getAccounts();
+  const accounts = entities.getAccounts();
   const [accountFrom, accountTo] = accounts;
 
   expect(accountFrom.name).toBe("Account From");

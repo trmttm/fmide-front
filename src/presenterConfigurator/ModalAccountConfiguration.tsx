@@ -1,12 +1,12 @@
 import * as presenter from "../presenter/Presenter";
-import { setHookShowAccountConfiguration } from "../entities/accounts";
+import { entities } from "../entities/entities";
 
 export function ModalAccountConfiguration(
   accountId: number,
   showModal: boolean,
   setShowModal: (value: ((prevState: boolean) => boolean) | boolean) => void
 ) {
-  setHookShowAccountConfiguration(accountId, showModal);
+  entities.setHookShowAccountConfiguration(accountId, showModal);
   presenter.attachToOpenAccountConfiguration(accountId, () =>
     setShowModal(true)
   );

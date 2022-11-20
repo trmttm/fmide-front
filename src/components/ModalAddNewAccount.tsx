@@ -3,8 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
-import { createAccount } from "../entities/accounts";
 import * as presenter from "../presenter/Presenter";
+import { entities } from "../entities/entities";
 
 export function ModalAddNewAccount() {
   const show = presenter.getHookShowAddNewAccountInputName();
@@ -16,7 +16,7 @@ export function ModalAddNewAccount() {
   }
 
   function addNewAccountAndClose() {
-    createAccount(userInput);
+    entities.createAccount(userInput);
     setUserInput("");
     handleClose();
   }

@@ -1,10 +1,10 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Connectable } from "./Connectable";
-import { createAccount } from "../entities/accounts";
 import * as mode from "../entities/mode";
 import * as connections from "../entities/connections";
 import { typeAccount } from "../interfaces/types";
+import { entities } from "../entities/entities";
 
 function renderConnectable(account: typeAccount) {
   render(<Connectable account={account}>Connectable</Connectable>);
@@ -14,8 +14,8 @@ function renderConnectable(account: typeAccount) {
 }
 
 test("Connectable connects accounts", () => {
-  const accountFrom = createAccount("Account From", 10, 20);
-  const accountTo = createAccount("Account To", 50, 80);
+  const accountFrom = entities.createAccount("Account From", 10, 20);
+  const accountTo = entities.createAccount("Account To", 50, 80);
 
   let view = renderConnectable(accountFrom);
   fireEvent.mouseDown(view, { metaKey: true });

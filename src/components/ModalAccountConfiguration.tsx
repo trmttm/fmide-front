@@ -3,15 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
-import {
-  getHookShowAccountModification,
-  modifyAccountName,
-} from "../entities/accounts";
 import * as presenter from "../presenter/Presenter";
+import { entities } from "../entities/entities";
 
 export function ModalAccountConfiguration(props: { accountId: number }) {
   const accountId: number = props.accountId;
-  const show = getHookShowAccountModification(accountId);
+  const show = entities.getHookShowAccountModification(accountId);
   const handleClose = () => presenter.closeAccountConfiguration(accountId);
   const [userInput, setUserInput] = useState("");
 
@@ -20,7 +17,7 @@ export function ModalAccountConfiguration(props: { accountId: number }) {
   }
 
   function modifyAccountNameAndClose() {
-    modifyAccountName(accountId, userInput);
+    entities.modifyAccountName(accountId, userInput);
     setUserInput("");
     handleClose();
   }
