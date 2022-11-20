@@ -2,10 +2,10 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
-import * as entityAccounts from "../entities/accounts";
 import * as entityConnections from "../entities/connections";
 import * as entityLines from "../entities/line";
 import { entities } from "../entities/entities";
+
 function getAddNewAccountButton() {
   return screen.getByRole("button", { name: setting.btnTextAddNewAccount });
 }
