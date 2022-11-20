@@ -1,5 +1,3 @@
-import { typeLineObservers } from "../entities/line";
-
 export type typeAccountObservers = {
   setName: (value: string) => void;
   setWidth: (value: number) => void;
@@ -22,6 +20,12 @@ export type typeAccount = {
   setHeight: (height: number) => void;
   observers: typeAccountObservers[];
   attachObservers: (observer: typeAccountObservers) => void;
+};
+export type typeLineObservers = {
+  setX: (x: number) => void;
+  setY: (y: number) => void;
+  setWidth: (width: number) => void;
+  setAngle: (angle: number) => void;
 };
 export type typeLine = {
   id: string | number;

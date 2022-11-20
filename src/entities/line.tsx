@@ -1,12 +1,12 @@
 import { connectorLineId } from "../setting";
 import * as util from "../utilities/utilities";
-import { typeAccount, typeLine } from "../interfaces/types";
+import { typeAccount, typeLine, typeLineObservers } from "../interfaces/types";
 
 let [connectorX1, connectorY1, isDrawingCline] = [0, 0, false];
 let observersToNotification: (() => void)[] = [];
 let Lines: typeLine[] = [];
 
-export function clearState() {
+export function clearStates() {
   [connectorX1, connectorY1, isDrawingCline] = [0, 0, false];
   observersToNotification = [];
   Lines = [];
@@ -138,13 +138,6 @@ export function removeCLine() {
   connectorLine.setWidth(0);
   connectorLine.setAngle(0);
 }
-
-export type typeLineObservers = {
-  setX: (x: number) => void;
-  setY: (y: number) => void;
-  setWidth: (width: number) => void;
-  setAngle: (angle: number) => void;
-};
 
 export function attachObservers(line: typeLine, observers: typeLineObservers) {
   line.observers = observers;

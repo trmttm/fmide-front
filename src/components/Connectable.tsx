@@ -1,7 +1,6 @@
 import React from "react";
 import * as mode from "../entities/mode";
 import { typeAccount } from "../interfaces/types";
-import { updateConnectionLines } from "../entities/line";
 import { entities } from "../entities/entities";
 
 export function Connectable(props: {
@@ -23,7 +22,7 @@ export function Connectable(props: {
     const connectionFromAccount = entities.getConnectionFromAccount();
     if (connectionFromAccount !== null) {
       entities.connectAccounts(connectionFromAccount, account);
-      updateConnectionLines(connectionFromAccount, account);
+      entities.updateConnectionLines(connectionFromAccount, account);
     }
   }
 

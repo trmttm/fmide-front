@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ModalAddNewAccount } from "./ModalAddNewAccount";
 import { entities } from "../entities/entities";
 import { Line } from "./Line";
-import * as line from "../entities/line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
@@ -14,26 +13,29 @@ import * as presenter from "../presenter/Presenter";
 export function IDE() {
   configurePresenter.configureModalAddNewAccount(...useState(false));
   configurePresenter.configureDrawLine(...useState(0));
-  line.attachObserversToNotification(presenter.drawLine);
+  entities.attachObserversToNotification(presenter.drawLine);
 
-  const connectorLine = line.getCLine();
+  const connectorLine = entities.getCLine();
   const style = { backgroundColor: "white", height: "90vh" };
   const myRef: React.MutableRefObject<any> = React.useRef(null);
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {
-      line.startDrawingCline(e.clientX, e.clientY - myRef.current.offsetTop);
+      entities.startDrawingCline(
+        e.clientX,
+        e.clientY - myRef.current.offsetTop
+      );
     }
   }
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     if (states.isConnectingMode()) {
-      line.drawCLine(e.clientX, e.clientY - myRef.current.offsetTop);
+      entities.drawCLine(e.clientX, e.clientY - myRef.current.offsetTop);
     }
   }
 
   function handleMouseUp(_: React.MouseEvent<HTMLDivElement>) {
-    line.removeCLine();
+    entities.removeCLine();
     states.turnOffConnectingMode();
   }
 
@@ -44,7 +46,7 @@ export function IDE() {
   }
 
   function onKeyUp(_: React.KeyboardEvent<HTMLDivElement>) {
-    line.removeCLine();
+    entities.removeCLine();
     states.turnOffConnectingMode();
   }
 
@@ -61,7 +63,7 @@ export function IDE() {
       ref={myRef}
     >
       <Line key={connectorLine.id} line={connectorLine} />
-      {line.getLines().map(addNewLineElement)}
+      {entities.getLines().map(addNewLineElement)}
       <Controller />
       <ModalAddNewAccount />
       {entities.getAccounts().map(addNewAccountElement)}

@@ -2,7 +2,6 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
-import * as entityLines from "../entities/line";
 import { entities } from "../entities/entities";
 
 function getAddNewAccountButton() {
@@ -78,11 +77,11 @@ test("Connect two accounts draws a line", () => {
   const connectableTo = screen.getByTestId("connectable-" + accountTo.id);
   fireEvent.mouseDown(connectableFrom, { metaKey: true });
   fireEvent.mouseUp(connectableTo, { metaKey: true });
-  const lineKey = entityLines.getConnectorDictionaryKey(
+  const lineKey = entities.getConnectorDictionaryKey(
     accountFrom.id,
     accountTo.id
   );
-  const line = entityLines.getLineById(lineKey);
+  const line = entities.getLineById(lineKey);
   expect(line === undefined).toBe(false);
   let [testX, testY, testWidth, testAngle] = [0, 0, 0, 0];
   if (line !== undefined) {
@@ -103,7 +102,7 @@ function testIfSpecifiedLineExists(lineId: string | number) {
 }
 
 function testLinePropertiesMatch(lineId: number | string) {
-  const lineState = entityLines.getLineById(lineId);
+  const lineState = entities.getLineById(lineId);
   const lineElement = screen.getByTestId(lineId);
   const expectedX = lineState !== undefined ? lineState.x + "px" : "0px";
   const expectedY = lineState !== undefined ? lineState.y + "px" : "0px";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { attachObservers, typeLineObservers } from "../entities/line";
-import { typeLine } from "../interfaces/types";
+import { typeLine, typeLineObservers } from "../interfaces/types";
+import { entities } from "../entities/entities";
 
 export function Line(props: { line: typeLine }) {
   const line: typeLine = props.line;
@@ -14,7 +14,7 @@ export function Line(props: { line: typeLine }) {
     setWidth: setWidth,
     setAngle: setAngle,
   };
-  attachObservers(line, observers);
+  entities.attachObservers(line, observers);
 
   const css: {} = {
     backgroundColor: "black",
