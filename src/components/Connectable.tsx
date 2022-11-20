@@ -1,5 +1,4 @@
 import React from "react";
-import * as mode from "../entities/mode";
 import { typeAccount } from "../interfaces/types";
 import { entities } from "../entities/entities";
 
@@ -14,7 +13,7 @@ export function Connectable(props: {
   };
 
   function setConnectionFrom(_: React.MouseEvent<HTMLDivElement>) {
-    mode.turnOnConnectingMode();
+    entities.turnOnConnectingMode();
     entities.setConnectionFromAccount(account);
   }
 
@@ -45,6 +44,6 @@ function wrapperOnlyIfMetaKey(
   if (event.metaKey) {
     f(event);
   } else {
-    mode.turnOffConnectingMode();
+    entities.turnOffConnectingMode();
   }
 }

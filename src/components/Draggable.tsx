@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as state from "../entities/mode";
+import { entities } from "../entities/entities";
 
 export type typeDraggableProps = {
   children: React.ReactNode;
@@ -72,7 +72,7 @@ function wrapperDraggingMode(
   f: (args: any) => void,
   event: React.DragEvent<HTMLDivElement>
 ) {
-  if (state.isDraggingMode()) {
+  if (entities.isDraggingMode()) {
     f(event);
   } else {
     event.preventDefault();

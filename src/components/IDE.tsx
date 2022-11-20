@@ -5,7 +5,6 @@ import { Line } from "./Line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
-import * as states from "../entities/mode";
 import { typeAccount, typeLine } from "../interfaces/types";
 import * as configurePresenter from "../presenterConfigurator";
 import * as presenter from "../presenter/Presenter";
@@ -20,7 +19,7 @@ export function IDE() {
   const myRef: React.MutableRefObject<any> = React.useRef(null);
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
-    if (states.isConnectingMode()) {
+    if (entities.isConnectingMode()) {
       entities.startDrawingCline(
         e.clientX,
         e.clientY - myRef.current.offsetTop
@@ -29,25 +28,25 @@ export function IDE() {
   }
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (states.isConnectingMode()) {
+    if (entities.isConnectingMode()) {
       entities.drawCLine(e.clientX, e.clientY - myRef.current.offsetTop);
     }
   }
 
   function handleMouseUp(_: React.MouseEvent<HTMLDivElement>) {
     entities.removeCLine();
-    states.turnOffConnectingMode();
+    entities.turnOffConnectingMode();
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     if (e.key === "Meta") {
-      states.turnOnConnectingMode();
+      entities.turnOnConnectingMode();
     }
   }
 
   function onKeyUp(_: React.KeyboardEvent<HTMLDivElement>) {
     entities.removeCLine();
-    states.turnOffConnectingMode();
+    entities.turnOffConnectingMode();
   }
 
   return (

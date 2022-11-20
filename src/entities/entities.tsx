@@ -1,6 +1,7 @@
 import * as account from "./accounts";
 import * as connections from "./connections";
 import * as line from "./line";
+import * as mode from "./mode";
 
 class Entities {
   getAccounts = account.getAccounts;
@@ -27,6 +28,11 @@ class Entities {
   updateConnectionLines = line.updateConnectionLines;
   getConnectorDictionaryKey = line.getConnectorDictionaryKey;
   getLineById = line.getLineById;
+
+  isDraggingMode = mode.isDraggingMode;
+  isConnectingMode = mode.isConnectingMode;
+  turnOffConnectingMode = mode.turnOffConnectingMode;
+  turnOnConnectingMode = mode.turnOnConnectingMode;
 }
 
 export const entities = new Entities();

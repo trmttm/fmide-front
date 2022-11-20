@@ -1,7 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Connectable } from "./Connectable";
-import * as mode from "../entities/mode";
 import { typeAccount } from "../interfaces/types";
 import { entities } from "../entities/entities";
 
@@ -18,7 +17,7 @@ test("Connectable connects accounts", () => {
 
   let view = renderConnectable(accountFrom);
   fireEvent.mouseDown(view, { metaKey: true });
-  expect(mode.isConnectingMode()).toBe(true);
+  expect(entities.isConnectingMode()).toBe(true);
   expect(entities.getConnectionFromAccount()).toBe(accountFrom);
 
   view = renderConnectable(accountTo);
