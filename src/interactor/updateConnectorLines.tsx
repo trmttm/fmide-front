@@ -1,4 +1,3 @@
-import { getAccountToConnectedAccounts } from "../entities/connections";
 import { updateConnectionLines } from "../entities/line";
 import { typeAccount } from "../interfaces/types";
 import { entities } from "../entities/entities";
@@ -15,7 +14,7 @@ export function updateConnectorLines(accountFrom: typeAccount) {
 
 function getAccountsConnectedToAccount(accountId: number): number[] {
   let connectedAccounts: number[] = [];
-  const accountToConnectedAccounts = getAccountToConnectedAccounts();
+  const accountToConnectedAccounts = entities.getAccountToConnectedAccounts();
   if (accountId in accountToConnectedAccounts) {
     connectedAccounts = accountToConnectedAccounts[accountId];
   }

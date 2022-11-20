@@ -2,7 +2,6 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Connectable } from "./Connectable";
 import * as mode from "../entities/mode";
-import * as connections from "../entities/connections";
 import { typeAccount } from "../interfaces/types";
 import { entities } from "../entities/entities";
 
@@ -20,11 +19,11 @@ test("Connectable connects accounts", () => {
   let view = renderConnectable(accountFrom);
   fireEvent.mouseDown(view, { metaKey: true });
   expect(mode.isConnectingMode()).toBe(true);
-  expect(connections.getConnectionFromAccount()).toBe(accountFrom);
+  expect(entities.getConnectionFromAccount()).toBe(accountFrom);
 
   view = renderConnectable(accountTo);
   fireEvent.mouseUp(view, { metaKey: true });
-  expect(JSON.stringify(connections.getConnections())).toBe(
+  expect(JSON.stringify(entities.getConnections())).toBe(
     JSON.stringify([[accountFrom.id, accountTo.id]])
   );
 });

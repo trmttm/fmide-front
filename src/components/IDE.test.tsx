@@ -2,7 +2,6 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IDE } from "./IDE";
 import * as setting from "../setting";
-import * as entityConnections from "../entities/connections";
 import * as entityLines from "../entities/line";
 import { entities } from "../entities/entities";
 
@@ -63,7 +62,6 @@ test("lines are drawn per Lines model", () => {
 
 test("Connect two accounts draws a line", () => {
   entities.clearStates();
-  entityConnections.clearStates();
 
   render(<IDE />);
   const button = getAddNewAccountButton();

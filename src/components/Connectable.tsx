@@ -1,9 +1,8 @@
 import React from "react";
 import * as mode from "../entities/mode";
-import * as connections from "../entities/connections";
-import { connectAccounts } from "../entities/connections";
 import { typeAccount } from "../interfaces/types";
 import { updateConnectionLines } from "../entities/line";
+import { entities } from "../entities/entities";
 
 export function Connectable(props: {
   children: React.ReactNode;
@@ -17,13 +16,13 @@ export function Connectable(props: {
 
   function setConnectionFrom(_: React.MouseEvent<HTMLDivElement>) {
     mode.turnOnConnectingMode();
-    connections.setConnectionFromAccount(account);
+    entities.setConnectionFromAccount(account);
   }
 
   function setConnectionTo(_: React.MouseEvent<HTMLDivElement>) {
-    const connectionFromAccount = connections.getConnectionFromAccount();
+    const connectionFromAccount = entities.getConnectionFromAccount();
     if (connectionFromAccount !== null) {
-      connectAccounts(connectionFromAccount, account);
+      entities.connectAccounts(connectionFromAccount, account);
       updateConnectionLines(connectionFromAccount, account);
     }
   }
