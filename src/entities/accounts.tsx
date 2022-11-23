@@ -63,7 +63,10 @@ export function modifyAccountName(id: number, name: string) {
 
 function setNameToAccount(account: typeAccount, name: string) {
   account.name = name;
-  account.observers.forEach((observer) => observer.setName(name));
+  account.observers.forEach((observer) => {
+    observer.setName(name);
+    setWidthToAccount(account, name.length * 15);
+  });
 }
 
 function setXToAccount(account: typeAccount, x: number) {
