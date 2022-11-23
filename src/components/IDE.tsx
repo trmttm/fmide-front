@@ -5,7 +5,7 @@ import { Line } from "./Line";
 import { Account } from "./Account";
 import { Controller } from "./Controller";
 import { Connectable } from "./Connectable";
-import { typeAccount, typeLine } from "../interfaces/types";
+import * as types from "../interfaces/types";
 import * as presenter from "../presenter/Presenter";
 import { presenterConfigurator } from "../presenterConfigurator";
 
@@ -70,11 +70,11 @@ export function IDE() {
   );
 }
 
-function addNewLineElement(line: typeLine) {
+function addNewLineElement(line: types.typeLine) {
   return <Line key={line.id} line={line} />;
 }
 
-export function addNewAccountElement(account: typeAccount) {
+export function addNewAccountElement(account: types.typeAccount) {
   return (
     <Connectable key={account.id} account={account}>
       <Account key={account.id} account={account} />

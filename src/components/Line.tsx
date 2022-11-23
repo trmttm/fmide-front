@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { typeLine, typeLineObservers } from "../interfaces/types";
+import * as types from "../interfaces/types";
 import { entities } from "../entities/entities";
 
-export function Line(props: { line: typeLine }) {
-  const line: typeLine = props.line;
+export function Line(props: { line: types.typeLine }) {
+  const line: types.typeLine = props.line;
   const [x, setX] = useState(line.x);
   const [y, setY] = useState(line.y);
   const [width, setWidth] = useState(line.width);
   const [angle, setAngle] = useState(line.angle);
-  const observers: typeLineObservers = {
+  const observers: types.typeLineObservers = {
     setX: setX,
     setY: setY,
     setWidth: setWidth,
