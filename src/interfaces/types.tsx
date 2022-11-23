@@ -12,6 +12,7 @@ export type typeAccount = {
   x: number;
   y: number;
   width: number;
+  defaultWidth: () => number;
   height: number;
   setX: (x: number) => void;
   setY: (y: number) => void;

@@ -36,6 +36,7 @@ export function createAccount(
     x: x === undefined ? 0 : x,
     y: y === undefined ? 0 : y,
     width: width === undefined ? name.length * 15 : width,
+    defaultWidth: () => newAccount.name.length * 15,
     height: height === undefined ? 38 : height,
     setName: (name: string) => setNameToAccount(newAccount, name),
     setX: (x: number) => setXToAccount(newAccount, x),
@@ -65,7 +66,7 @@ function setNameToAccount(account: typeAccount, name: string) {
   account.name = name;
   account.observers.forEach((observer) => {
     observer.setName(name);
-    setWidthToAccount(account, name.length * 15);
+    setWidthToAccount(account, account.defaultWidth());
   });
 }
 
