@@ -1,7 +1,7 @@
 import * as presenter from "../presenter/Presenter";
 import { entities } from "../entities/entities";
 
-export function ModalAccountConfiguration(
+export function configureModalAccountConfiguration(
   accountId: number,
   showModal: boolean,
   setShowModal: (value: ((prevState: boolean) => boolean) | boolean) => void

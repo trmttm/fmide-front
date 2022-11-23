@@ -1,6 +1,6 @@
 import * as presenter from "../presenter/Presenter";
 
-export function ModalAddNewAccount(
+export function configureModalAddNewAccount(
   showModal: boolean,
   setShowModal: (value: ((prevState: boolean) => boolean) | boolean) => void
 ) {

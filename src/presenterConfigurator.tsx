@@ -1,11 +1,11 @@
-import { ModalAddNewAccount } from "./presenterConfigurator/ModalAddNewAccount";
+import { configureModalAddNewAccount } from "./presenterConfigurator/ModalAddNewAccount";
 import { drawLine } from "./presenterConfigurator/DrawLine";
-import { ModalAccountConfiguration } from "./presenterConfigurator/ModalAccountConfiguration";
+import { configureModalAccountConfiguration } from "./presenterConfigurator/ModalAccountConfiguration";
 
 class PresenterConfigurator {
-  configureModalAddNewAccount = ModalAddNewAccount;
+  configureModalAddNewAccount = configureModalAddNewAccount;
   configureDrawLine = drawLine;
-  configureAccountConfiguration = ModalAccountConfiguration;
+  configureAccountConfiguration = configureModalAccountConfiguration;
 }
 
 export const presenterConfigurator = new PresenterConfigurator();
